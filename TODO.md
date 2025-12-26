@@ -1,0 +1,8 @@
+- [ ] Add image URLs to the events data in Home.jsx
+- [ ] Import useState and useEffect from React
+- [ ] Add state for current slide index
+- [ ] Implement auto-sliding effect with useEffect
+- [ ] Replace grid layout with carousel container
+- [ ] Add prev/next navigation buttons
+- [ ] Add slide indicators (dots)
+- [ ] Style the carousel for smooth transitions

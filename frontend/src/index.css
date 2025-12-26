@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #FF6E30;
+  --color-primary-hover: #e55a20;
+  --color-secondary: #1e3a8a;
+  --color-brand-navy: #1E246E;
+  /* Dark Blue from the image */
+  --font-sans: Inter, system-ui, sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-slide-up: slideUp 0.5s ease-out forwards;
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes wiggle {
+
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+}
+
+@layer base {
+  body {
+    @apply font-sans text-gray-900 bg-gray-50 antialiased;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.home-about-content p {
+  @apply mb-4;
+}
+
+.home-about-content p:last-child {
+  @apply mb-0;
+}
+
+@media print {
+  @page { margin: 0; size: auto; }
+  body { background: white; }
+  
+  /* Hide non-printable elements */
+  .no-print, 
+  aside, 
+  header, 
+  button,
+  .print-hidden {
+    display: none !important;
+  }
+
+  /* Make sure printable content is visible and takes full width */
+  .printable-content,
+  .printable-modal {
+    display: block !important;
+    visibility: visible !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    background: white;
+    box-shadow: none !important;
+  }
+
+  
+  /* Specific fix for modal printing */
+  .modal-overlay {
+    position: static;
+    background: white;
+    padding: 0;
+  }
+  
+  .modal-content {
+    box-shadow: none;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  /* Table styling for print */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  
+  th, td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    color: black !important;
+  }
+  
+  th {
+    background-color: #f3f4f6 !important;
+  }
+}
