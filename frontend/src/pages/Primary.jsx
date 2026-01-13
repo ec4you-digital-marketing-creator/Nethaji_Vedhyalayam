@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { FaBookOpen, FaGlobe, FaFlask, FaCalculator, FaCheckCircle, FaAward, FaBullseye, FaLeaf, FaLandmark } from 'react-icons/fa';
+import primaryClassroomImage from '../images/C0465T01.JPG';
 
 const Primary = () => {
     useEffect(() => {
@@ -107,7 +108,7 @@ const Primary = () => {
                         </div>
                         <div className="lg:w-1/2">
                             <img
-                                src="../src/images/C0465T01.JPG"
+                                src={primaryClassroomImage}
                                 alt="Primary Classroom"
                                 loading="lazy"
                                 className="rounded-2xl shadow-2xl"

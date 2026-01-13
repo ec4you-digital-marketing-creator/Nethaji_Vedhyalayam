@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-h!prwy7xty)d9btpn$%9jbrlxt76jqr%-k@)a^3quf61mr)c++
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['api.nethajividhyalayam.com', '*']
+ALLOWED_HOSTS = ['api.nethajividhyalayam.com', 'localhost', '127.0.0.1', '*']
 
 
 # Application definition
@@ -70,11 +70,17 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://nethajividhyalayam.com",
     "https://nethajividhyalayam.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://nethajividhyalayam.com",
     "https://nethajividhyalayam.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
 ]
 
 ROOT_URLCONF = 'backend.urls'

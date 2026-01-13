@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaEnvelope, FaLinkedin, FaGraduationCap, FaAward } from 'react-icons/fa';
 import { API_BASE_URL } from '../api/config';
+import principalFallback from '../images/DSC07211.JPG';
 
 const Faculty = () => {
     const [pageContent, setPageContent] = useState(null);
@@ -62,7 +63,7 @@ const Faculty = () => {
                                 name: "Dr.K. PRAMILA", role: "Principal",
                                 qualification: "M.Sc.,M.Phil.,Ph.d.",
                                 message: "Empowering students to become global citizens through holistic education.",
-                                img: "../images/DSC07211.JPG"
+                                img: principalFallback
                             },
                         ]).map((leader, index) => (
                             <div key={index} className="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col sm:flex-row border-t-4 border-primary">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaArrowRight, FaTimes, FaFilter } from 'react-icons/fa';
 import api from '../api/config';
 import { API_BASE_URL } from '../api/config';
+import eventsBannerImage from '../images/C0475T01.JPG';
 
 const CATEGORIES = ["All", "Academic", "Sports", "Cultural", "Workshop", "Celebration"];
 
@@ -43,7 +44,7 @@ const Events = () => {
             <div className="relativePath relative h-[400px] bg-[var(--color-brand-navy)] overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 z-10"></div>
                 <img
-                    src="../src/images/C0475T01.JPG"
+                    src={eventsBannerImage}
                     alt="Events Banner"
                     className="w-full h-full object-cover"
                 />

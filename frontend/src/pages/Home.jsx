@@ -29,6 +29,12 @@ import achivementImage2 from "../images/Home/achivement (2).jpg";
 import achivementImage3 from "../images/Home/achivement (3).jpg";
 import achivementImage4 from "../images/Home/achivement (4).jpg";
 
+import correspondentImage from "../images/Correspontent.jpg";
+import secretaryImage from "../images/Secretry.jpg";
+import principalImage from "../images/princi.jpg";
+import schoolLogo from "../images/logo 512.png";
+import eventFallbackImage from "../images/Home/C0491T01.JPG";
+
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -481,17 +487,17 @@ const Home = () => {
               {
                 name: "Dr.M.B.KANNABIRAN",
                 role: "Correspondent",
-                photo: "../images/Correspontent.jpg",
+                photo: correspondentImage,
               },
               {
                 name: "B.SEKAR",
                 role: "SECRETARY",
-                photo: "../images/Secretry.jpg",
+                photo: secretaryImage,
               },
               {
                 name: "Dr.K. PRAMILA",
                 role: "Principal",
-                photo: "../images/princi.jpg",
+                photo: principalImage,
               },
             ]).map((leader, index) => (
               <div key={index} className="relative group mt-12">
@@ -590,7 +596,7 @@ const Home = () => {
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img
-                      src={event.image ? (event.image.startsWith('http') ? event.image : `${API_BASE_URL}${event.image}`) : "https://via.placeholder.com/800x600"}
+                      src={event.image ? (event.image.startsWith('http') ? event.image : `${API_BASE_URL}${event.image}`) : eventFallbackImage}
                       alt={event.title}
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -638,7 +644,7 @@ const Home = () => {
                     <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 overflow-hidden">
                       <div className="relative h-56 overflow-hidden">
                         <img
-                          src={event.image ? (event.image.startsWith('http') ? event.image : `${API_BASE_URL}${event.image}`) : "https://via.placeholder.com/800x600"}
+                          src={event.image ? (event.image.startsWith('http') ? event.image : `${API_BASE_URL}${event.image}`) : eventFallbackImage}
                           alt={event.title}
                           loading="lazy"
                           className="w-full h-full object-cover"
@@ -734,7 +740,7 @@ const Home = () => {
                   className="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer"
                 >
                   <img
-                    src={achievement.image ? (achievement.image.startsWith('http') || achievement.image.startsWith('/src') ? achievement.image : `${API_BASE_URL}${achievement.image}`) : "https://via.placeholder.com/600x400"}
+                    src={achievement.image ? (achievement.image.startsWith('http') || achievement.image.startsWith('/src') ? achievement.image : `${API_BASE_URL}${achievement.image}`) : achivementImage}
                     alt={achievement.title}
                     loading="lazy"
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
@@ -779,7 +785,7 @@ const Home = () => {
                   <div key={index} className="w-full shrink-0 px-4">
                     <div className="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer">
                       <img
-                        src={achievement.image ? (achievement.image.startsWith('http') || achievement.image.startsWith('/src') ? achievement.image : `${API_BASE_URL}${achievement.image}`) : "https://via.placeholder.com/600x400"}
+                        src={achievement.image ? (achievement.image.startsWith('http') || achievement.image.startsWith('/src') ? achievement.image : `${API_BASE_URL}${achievement.image}`) : achivementImage}
                         alt={achievement.title}
                         loading="lazy"
                         className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
