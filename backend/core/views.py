@@ -1,8 +1,9 @@
-from rest_framework import viewsets
-from .models import HeroVideo, HomeAbout, TeamMember, Facility, Testimonial, AboutPageContent, CoreValue, HistoryPageContent, Milestone
+from rest_framework import viewsets, generics
+from .models import HeroVideo, HomeAbout, TeamMember, Facility, Testimonial, AboutPageContent, CoreValue, HistoryPageContent, Milestone, Poster, FeePayment, PaymentQR
 from .serializers import (HeroVideoSerializer, HomeAboutSerializer, TeamMemberSerializer, 
                           FacilitySerializer, TestimonialSerializer, AboutPageContentSerializer, 
-                          CoreValueSerializer, HistoryPageContentSerializer, MilestoneSerializer)
+                          CoreValueSerializer, HistoryPageContentSerializer, MilestoneSerializer, PosterSerializer,
+                          FeePaymentSerializer, PaymentQRSerializer)
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
@@ -73,3 +74,26 @@ class HistoryPageContentViewSet(viewsets.ReadOnlyModelViewSet):
 class MilestoneViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Milestone.objects.filter(is_active=True).order_by('order', 'year')
     serializer_class = MilestoneSerializer
+
+class PosterViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Poster.objects.filter(is_active=True).order_by('-updated_at')
+    serializer_class = PosterSerializer
+
+    @action(detail=False, methods=['get'])
+    def current(self, request):
+        poster = self.queryset.first()
+        if poster:
+            serializer = self.get_serializer(poster)
+            return Response(serializer.data)
+        return Response({})
+
+class FeePaymentCreateView(generics.CreateAPIView):
+    queryset = FeePayment.objects.all()
+    serializer_class = FeePaymentSerializer
+
+class PaymentQRView(generics.RetrieveAPIView):
+    queryset = PaymentQR.objects.filter(is_active=True).order_by('-created_at')
+    serializer_class = PaymentQRSerializer
+
+    def get_object(self):
+        return self.queryset.first()

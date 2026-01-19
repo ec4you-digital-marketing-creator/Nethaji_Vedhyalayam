@@ -242,6 +242,8 @@ const Home = () => {
             loop
             muted
             playsInline
+            preload="auto"
+            poster={heroVideo?.thumbnail ? (heroVideo.thumbnail.startsWith('http') ? heroVideo.thumbnail : `${API_BASE_URL}${heroVideo.thumbnail}`) : eventFallbackImage}
             className="w-full h-full object-cover"
           >
             <source
@@ -592,7 +594,7 @@ const Home = () => {
               {getVisibleCards().map((event, index) => (
                 <div
                   key={`${currentIndex}-${index}`}
-                  className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-500 animate-fade-in-up overflow-hidden group"
+                  className={`bg-white/10 backdrop-blur-md rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-500 animate-fade-in-up overflow-hidden group ${index === 2 ? 'hidden lg:block' : ''}`}
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img
@@ -737,7 +739,7 @@ const Home = () => {
               {getVisibleAchievements().map((achievement, index) => (
                 <div
                   key={`${achievementsCurrentIndex}-${index}`}
-                  className="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer"
+                  className={`group relative overflow-hidden rounded-xl shadow-lg cursor-pointer ${index === 2 ? 'hidden lg:block' : ''}`}
                 >
                   <img
                     src={achievement.image ? (achievement.image.startsWith('http') || achievement.image.startsWith('/src') ? achievement.image : `${API_BASE_URL}${achievement.image}`) : achivementImage}

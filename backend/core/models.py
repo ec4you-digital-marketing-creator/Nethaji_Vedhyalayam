@@ -5,6 +5,7 @@ class HeroVideo(models.Model):
     title = models.CharField(max_length=200, default="Welcome to Nethaji Vidyalayam")
     video_url = models.URLField(max_length=500, blank=True, null=True, help_text="Direct link to external video (optional if file uploaded)")
     video_file = models.FileField(upload_to='hero_videos/', blank=True, null=True, help_text="Upload local video file (optional if URL provided)")
+    thumbnail = models.ImageField(upload_to='hero_videos/thumbnails/', blank=True, null=True, help_text="Image to show while video is loading")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -177,3 +178,55 @@ class Milestone(models.Model):
         ordering = ['order', 'year']
         verbose_name = "Milestone"
         verbose_name_plural = "Milestones"
+
+class Poster(models.Model):
+    tag_text = models.CharField(max_length=100, default="Vijaya Dhasami 2025")
+    header_sub_title = models.CharField(max_length=200, default="Est. 2001 | 25 Years of Excellence")
+    title = models.CharField(max_length=200, default="ADMISSIONS OPEN NOW")
+    sub_title = models.CharField(max_length=200, default="PreKG TO 5th Grade")
+    discount_text = models.CharField(max_length=100, default="50% DISCOUNT")
+    discount_sub_text = models.CharField(max_length=100, default="On Tuition Fee")
+    extra_benefit = models.CharField(max_length=100, default="No Donation")
+    event_tag = models.CharField(max_length=100, default="Special Initiation")
+    event_date = models.CharField(max_length=100, default="2 OCT, 10 AM")
+    event_name = models.CharField(max_length=100, default="AKSHARABHYASAM")
+    event_sub_name = models.CharField(max_length=100, default="Event Celebration")
+    location = models.CharField(max_length=200, default="Medavakkam, Chennai")
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Poster"
+        verbose_name_plural = "Posters"
+
+class FeePayment(models.Model):
+    student_name = models.CharField(max_length=200)
+    parent_name = models.CharField(max_length=200)
+    phone_number = models.CharField(max_length=20)
+    grade = models.CharField(max_length=50)
+    section = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Payment Init: {self.student_name} ({self.grade})"
+
+    class Meta:
+        verbose_name = "Fee Payment"
+        verbose_name_plural = "Fee Payments"
+        ordering = ['-created_at']
+
+class PaymentQR(models.Model):
+    name = models.CharField(max_length=100, default="Default QR")
+    qr_image = models.ImageField(upload_to='payment_qr/')
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {'Active' if self.is_active else 'Inactive'}"
+
+    class Meta:
+        verbose_name = "Payment QR"
+        verbose_name_plural = "Payment QRs"

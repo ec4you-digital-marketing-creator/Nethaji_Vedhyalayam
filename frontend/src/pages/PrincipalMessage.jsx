@@ -89,7 +89,7 @@ const PrincipalMessage = () => {
                             </div>
 
                             {/* Video Section */}
-                            <div className="mt-12">
+                            {/* <div className="mt-12">
                                 <h3 className="text-2xl font-bold text-secondary mb-6">A Message from Our Principal</h3>
                                 <div className="relative w-full h-0 pb-[56.25%] rounded-xl overflow-hidden shadow-2xl border-4 border-white">
                                     <iframe
@@ -100,7 +100,7 @@ const PrincipalMessage = () => {
                                         allowFullScreen
                                     ></iframe>
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className="mt-10">
                                 <a href="/contact" className="inline-flex items-center bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">

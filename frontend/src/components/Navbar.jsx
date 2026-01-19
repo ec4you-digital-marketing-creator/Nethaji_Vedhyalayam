@@ -60,7 +60,7 @@ const Navbar = () => {
   return (
     <header className="bg-white shadow-md sticky top-0 z-50 font-sans">
       {/* Top Bar */}
-      <div className="bg-primary text-white py-2 text-sm hidden lg:block">
+      <div className="bg-primary text-white py-2 text-sm hidden xl:block">
         <div className="container mx-auto flex justify-between items-center px-4">
           <div className="flex items-center space-x-6">
             <a href="tel:+919444662737" className="flex items-center gap-2 hover:text-gray-200 transition-colors">
@@ -92,7 +92,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden xl:flex items-center space-x-1">
             {menuItems.map((item, index) => (
               <div key={index} className="relative group">
                 {item.submenu ? (
@@ -129,7 +129,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden text-gray-700 hover:text-primary transition-colors"
+            className="xl:hidden text-gray-700 hover:text-primary transition-colors"
             onClick={toggleMenu}
           >
             {isOpen ? <MdClose size={28} /> : <MdMenu size={28} />}
@@ -139,14 +139,14 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`lg:hidden fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        className={`xl:hidden fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
         onClick={toggleMenu}
       />
 
       {/* Mobile Side Menu */}
       <div
-        className={`lg:hidden fixed top-0 right-0 w-[80%] max-w-sm h-full bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`xl:hidden fixed top-0 right-0 w-[80%] max-w-sm h-full bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
         <div className="p-5 border-b flex justify-between items-center">

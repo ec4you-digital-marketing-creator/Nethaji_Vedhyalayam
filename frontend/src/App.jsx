@@ -25,6 +25,8 @@ const AdminStaff = lazy(() => import('./pages/AdminStaff'));
 import ProtectedRoute from './components/ProtectedRoute';
 import Poster from './components/Poster';
 
+import { API_BASE_URL } from './api/config';
+
 // Loading fallback component
 const PageLoader = () => (
   <div className="flex items-center justify-center min-h-[60vh]">
@@ -46,7 +48,26 @@ const PublicLayout = () => {
 };
 
 function App() {
-  const [showPoster, setShowPoster] = useState(true);
+  const [showPoster, setShowPoster] = useState(false);
+  const [posterData, setPosterData] = useState(null);
+
+  useEffect(() => {
+    const fetchPoster = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/core/posters/current/`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.id) {
+            setPosterData(data);
+            setShowPoster(true);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching poster:", error);
+      }
+    };
+    fetchPoster();
+  }, []);
 
   return (
     <Router>
@@ -92,7 +113,7 @@ function App() {
       </Suspense>
       {showPoster && (
         <div className="fixed inset-0 z-[9999] bg-black/5 backdrop-blur-xs overflow-y-auto">
-          <Poster onClose={() => setShowPoster(false)} />
+          <Poster data={posterData} onClose={() => setShowPoster(false)} />
         </div>
       )}
     </Router>
