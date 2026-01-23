@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { FaBookOpen, FaGlobe, FaFlask, FaCalculator, FaCheckCircle, FaAward, FaBullseye, FaLeaf, FaLandmark } from 'react-icons/fa';
+import SEO from '../components/SEO';
 import primaryClassroomImage from '../images/C0465T01.JPG';
 
 const Primary = () => {
@@ -70,6 +71,12 @@ const Primary = () => {
 
     return (
         <div className="font-sans bg-gray-50">
+            <SEO
+                title="Primary School Grades 1-5 | Academic Excellence in Chennai"
+                description="The Primary School years at Nethaji Vidyalayam, Medavakkam, build strong foundations in core subjects like Math and Science while nurturing character and values."
+                keywords="primary school Medavakkam, grade 1-5 education Chennai, best primary school Chennai, holistic primary education, Nethaji Vidyalayam academics"
+                url="/primary"
+            />
             {/* Hero */}
             <section className="relative h-[400px] flex items-center justify-center text-white">
                 <div className="absolute inset-0 bg-secondary/90 z-10"></div>
@@ -111,6 +118,7 @@ const Primary = () => {
                                 src={primaryClassroomImage}
                                 alt="Primary Classroom"
                                 loading="lazy"
+                                decoding="async"
                                 className="rounded-2xl shadow-2xl"
                             />
                         </div>

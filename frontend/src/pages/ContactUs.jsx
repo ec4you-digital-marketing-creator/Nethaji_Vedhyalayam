@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock, FaPaperPlane, FaUser, FaComment, FaArrowRight } from 'react-icons/fa';
+import SEO from '../components/SEO';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -52,19 +53,19 @@ const ContactUs = () => {
         {
             icon: <FaPhoneAlt size={32} />,
             title: "Call Us Directly",
-            primary: "+91 9445602389",
+            primary: "044-22772535 / 9444662737",
             secondary: "Mon-Fri, 8 AM - 4 PM",
             action: "Call Now",
-            link: "tel:+919445602389",
+            link: "tel:+919444662737",
             gradient: "from-green-400 to-green-600"
         },
         {
             icon: <FaEnvelope size={32} />,
             title: "Send an Email",
-            primary: "netajividhyalayamschool@gmail.com",
+            primary: "nethajividhyalayam2016@gmail.com",
             secondary: "24-hour response time",
             action: "Email Us",
-            link: "mailto:netajividhyalayamschool@gmail.com",
+            link: "mailto:nethajividhyalayam2016@gmail.com",
             gradient: "from-blue-400 to-blue-600"
         },
         {
@@ -80,16 +81,22 @@ const ContactUs = () => {
 
     return (
         <div className="font-sans bg-gray-50">
+            <SEO
+                title="Contact Nethaji Vidyalayam | Admissions & General Inquiry"
+                description="Contact Nethaji Vidyalayam in Medavakkam, Chennai for admissions and general inquiries. Call us at 044-22772535 or visit our campus to learn about our educational programs."
+                keywords="contact Nethaji Vidyalayam, school phone number Medavakkam, admission inquiry Chennai, school location Chennai, visit school campus"
+                url="/contact"
+            />
             <ToastContainer position="top-right" autoClose={3000} />
             {/* Centered Hero */}
-            <section className="relative bg-gradient-to-br from-secondary via-primary to-purple-600 text-white py-32 overflow-hidden">
+            <section className="relative bg-linear-to-br from-secondary via-primary to-purple-600 text-white py-32 overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
                 <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -ml-20 -mb-20"></div>
                 <div className="container mx-auto px-4 text-center relative z-10">
                     <span className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold tracking-wider mb-6">
                         We're Here to Help
                     </span>
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6">Get in Touch</h1>
+                    <h1 className="text-5xl md:text-6xl font-bold mb-6">Contact Nethaji Vidyalayam</h1>
                     <p className="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
                         Have questions about admissions, our curriculum, or campus life? We'd love to hear from you.
                     </p>
@@ -102,7 +109,7 @@ const ContactUs = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {contactMethods.map((method, index) => (
                             <div key={index} className="bg-white rounded-2xl shadow-2xl overflow-hidden hover:-translate-y-2 transition-transform duration-300">
-                                <div className={`bg-gradient-to-r ${method.gradient} p-8 text-white text-center`}>
+                                <div className={`bg-linear-to-r ${method.gradient} p-8 text-white text-center`}>
                                     <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full mb-4">
                                         {method.icon}
                                     </div>
@@ -138,7 +145,7 @@ const ContactUs = () => {
                     <form onSubmit={handleSubmit} className="bg-gray-50 rounded-2xl p-8 md:p-12 shadow-xl">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
-                                <label className="block text-gray-700 font-bold mb-3 flex items-center gap-2">
+                                <label className="text-gray-700 font-bold mb-3 flex items-center gap-2">
                                     <FaUser size={18} className="text-primary" /> Full Name *
                                 </label>
                                 <input
@@ -152,7 +159,7 @@ const ContactUs = () => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-gray-700 font-bold mb-3 flex items-center gap-2">
+                                <label className="text-gray-700 font-bold mb-3 flex items-center gap-2">
                                     <FaEnvelope size={18} className="text-primary" /> Email Address *
                                 </label>
                                 <input
@@ -169,7 +176,7 @@ const ContactUs = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
-                                <label className="block text-gray-700 font-bold mb-3 flex items-center gap-2">
+                                <label className="text-gray-700 font-bold mb-3 flex items-center gap-2">
                                     <FaPhoneAlt size={18} className="text-primary" /> Phone Number
                                 </label>
                                 <input
@@ -200,7 +207,7 @@ const ContactUs = () => {
                         </div>
 
                         <div className="mb-8">
-                            <label className="block text-gray-700 font-bold mb-3 flex items-center gap-2">
+                            <label className="text-gray-700 font-bold mb-3 flex items-center gap-2">
                                 <FaComment size={18} className="text-primary" /> Your Message *
                             </label>
                             <textarea
@@ -217,7 +224,7 @@ const ContactUs = () => {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className={`w-full bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary text-white font-bold py-5 rounded-xl transition-all flex items-center justify-center gap-3 shadow-2xl hover:shadow-primary/50 text-lg ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                            className={`w-full bg-linear-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary text-white font-bold py-5 rounded-xl transition-all flex items-center justify-center gap-3 shadow-2xl hover:shadow-primary/50 text-lg ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                         >
                             {isSubmitting ? 'Sending...' : <><FaPaperPlane size={22} /> Send Message</>}
                         </button>

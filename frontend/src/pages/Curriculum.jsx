@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaBookOpen, FaBullseye, FaChartLine, FaAward, FaUsers, FaGlobe, FaCheckCircle, FaDownload } from 'react-icons/fa';
+import SEO from '../components/SEO';
 
 const Curriculum = () => {
     useEffect(() => {
@@ -192,15 +193,21 @@ const Curriculum = () => {
 
     return (
         <div className="font-sans bg-gray-50 text-gray-800">
+            <SEO
+                title="Academic Curriculum & Methodology | Nethaji Vidyalayam School"
+                description="Discover our holistic curriculum at Nethaji Vidyalayam, Medavakkam. We follow CBSE standards with a focus on Panchakosha principles and character building for all grades."
+                keywords="school curriculum Medavakkam, CBSE primary curriculum Chennai, Nethaji Vidyalayam methodology, holistic education framework, character building education"
+                url="/curriculum"
+            />
             {/* Hero */}
             <section className="relative h-[400px] flex items-center justify-center text-white overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 opacity-90 z-10"></div>
+                <div className="absolute inset-0 bg-linear-to-br from-orange-500 via-pink-500 to-purple-600 opacity-90 z-10"></div>
                 <div
                     className="absolute inset-0 bg-cover bg-center z-0"
                     style={{ backgroundImage: "url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')" }}
                 ></div>
                 <div className="relative z-20 container mx-auto px-4 text-center">
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Our Curriculum</h1>
+                    <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Nethaji Vidyalayam Curriculum</h1>
                     <p className="text-xl md:text-2xl text-gray-200 mobile-subtitle max-w-2xl mx-auto font-light">A Modern, Holistic Approach to Education</p>
                 </div>
             </section>
@@ -231,11 +238,11 @@ const Curriculum = () => {
                             <div key={index} className="bg-white p-8 rounded-xl border-t-4 border-primary shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-300">
 
                                 {/* Icon Container */}
-                                <div className="w-20 h-20 bg-gradient-to-br from-[#d36449] to-[#453c6d] text-white rounded-full mb-8 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(0,0,0,0.2)] transform group-hover:scale-110 transition-transform duration-300">
+                                <div className="w-20 h-20 bg-linear-to-br from-[#d36449] to-[#453c6d] text-white rounded-full mb-8 flex items-center justify-center shadow-[0_8px_20px_-5px_rgba(0,0,0,0.2)] transform group-hover:scale-110 transition-transform duration-300">
                                     {React.cloneElement(pillar.icon, { size: 30 })}
                                 </div>
 
-                                <h3 className="text-xl font-bold text-[#1e3a8a] mb-4">{pillar.title}</h3>
+                                <h3 className="text-xl font-bold text-secondary mb-4">{pillar.title}</h3>
                                 <p className="text-gray-500 leading-relaxed text-sm px-2">{pillar.desc}</p>
                             </div>
                         ))}

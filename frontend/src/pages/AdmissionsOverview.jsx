@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 import {
   FaClipboardCheck,
   FaCalendarAlt,
@@ -52,6 +53,12 @@ const AdmissionsOverview = () => {
 
   return (
     <div className="font-sans bg-gray-50">
+      <SEO
+        title="School Admissions Overview | Join Nethaji Vidyalayam, Chennai"
+        description="Learn how to join Nethaji Vidyalayam, Medavakkam. Our admission process is simple, covering registration, age criteria, and document requirements for Pre-KG to Grade 5."
+        keywords="school admissions Medavakkam, how to join Nethaji Vidyalayam, primary school admission Chennai, kindergarten admission process, school age criteria"
+        url="/admissions"
+      />
       {/* Hero Section */}
       <section className="relative h-[400px] flex items-center justify-center text-center text-white">
         <div className="absolute inset-0 bg-secondary/90 z-10"></div>
@@ -105,6 +112,7 @@ const AdmissionsOverview = () => {
                 src={pageContent?.why_image ? (pageContent.why_image.startsWith('http') ? pageContent.why_image : `${API_BASE_URL}${pageContent.why_image}`) : "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
                 alt="Students Learning"
                 loading="lazy"
+                decoding="async"
                 className="rounded-2xl shadow-2xl border-4 border-white"
               />
             </div>

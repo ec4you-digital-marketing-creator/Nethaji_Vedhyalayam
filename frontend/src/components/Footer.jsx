@@ -16,16 +16,13 @@ const Footer = () => {
                             Nethaji Vidyalayam has been in the field of education for over two decades. With a rich experience in moulding the young generation, we provide quality education of international standard with modern technology and state-of-the-art facilities.
                         </p>
                         <div className="flex space-x-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
+                            <a href="https://www.facebook.com/people/Netaji-Vidhyalayam/61585132649025/" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
                                 <FaFacebook size={20} />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
-                                <FaTwitter size={20} />
-                            </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
+                            <a href="https://www.instagram.com/nethajividhyalayam/?hl=en" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
                                 <FaInstagram size={20} />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
+                            <a href="https://www.youtube.com/channel/UCXcVc1qeWcmyPYjDA78a3Xw" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
                                 <FaYoutube size={20} />
                             </a>
                         </div>
@@ -119,10 +116,12 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
                     <p>&copy; {new Date().getFullYear()} Nethaji Vidyalayam. All rights reserved.</p>
-                    <p>Designed & Developed By EC4You</p>
+                    <a href="https://ec4you.in" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                        Designed & Developed By EC4You
+                    </a>
                     <div className="flex space-x-6 mt-4 md:mt-0">
-                        <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                        <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                        <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
                     </div>
                 </div>
             </div>

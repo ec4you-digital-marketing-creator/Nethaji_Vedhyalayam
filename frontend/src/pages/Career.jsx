@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaBriefcase, FaUpload, FaSpinner, FaCheckCircle } from 'react-icons/fa';
+import SEO from '../components/SEO';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { API_BASE_URL } from '../api/config';
@@ -118,6 +119,12 @@ const Career = () => {
 
     return (
         <div className="font-sans bg-gray-50 min-h-screen">
+            <SEO
+                title="Join Our Team | Teaching & Staff Careers at Nethaji Vidyalayam"
+                description="Explore career opportunities at Nethaji Vidyalayam, Medavakkam. We are looking for passionate teachers and staff members to join our school in Chennai. Apply today!"
+                keywords="teacher jobs Medavakkam, school recruitment Chennai, careers in education, teaching positions Chennai, school staff jobs Medavakkam"
+                url="/careers"
+            />
             <ToastContainer position="top-right" autoClose={3000} />
             {/* Hero Section */}
             <section className="relative h-[300px] flex items-center justify-center text-center text-white bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')" }}>

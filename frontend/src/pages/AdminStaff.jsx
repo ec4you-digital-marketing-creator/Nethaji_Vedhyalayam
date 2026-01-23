@@ -17,7 +17,8 @@ import {
     FaPhoneAlt,
     FaEnvelope,
     FaClock,
-    FaPrint
+    FaPrint,
+    FaUserShield
 } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/config';
@@ -26,6 +27,7 @@ const AdminStaff = () => {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('dashboard');
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const userType = localStorage.getItem('userType');
 
     // Data States
     const [students, setStudents] = useState([]);
@@ -33,18 +35,20 @@ const AdminStaff = () => {
     const [careers, setCareers] = useState([]);
     const [contactMessages, setContactMessages] = useState([]);
     const [events, setEvents] = useState([]);
+    const [users, setUsers] = useState([]);
     const [, setLoading] = useState(true);
 
     // Fetch Data
     const fetchData = async () => {
         try {
             setLoading(true);
-            const [studentsRes, enquiriesRes, careersRes, contactRes, eventsRes] = await Promise.all([
+            const [studentsRes, enquiriesRes, careersRes, contactRes, eventsRes, usersRes] = await Promise.all([
                 api.get('/administration/students/'),
                 api.get('/admissions/inquiries/'),
                 api.get('/contact/career-applications/'),
                 api.get('/contact/messages/'),
-                api.get('/events/events/')
+                api.get('/events/events/'),
+                api.get('/auth/users/').catch(() => ({ data: [] })) // Handle 404 gracefully
             ]);
             setStudents(studentsRes.data);
 
@@ -76,6 +80,7 @@ const AdminStaff = () => {
 
             setContactMessages(contactRes.data);
             setEvents(eventsRes?.data || []);
+            setUsers(usersRes?.data || []);
         } catch (error) {
             console.error("Failed to fetch data", error);
         } finally {
@@ -104,6 +109,7 @@ const AdminStaff = () => {
     const [currentStudent, setCurrentStudent] = useState(null);
     const [isEventModalOpen, setIsEventModalOpen] = useState(false);
     const [currentEvent, setCurrentEvent] = useState(null);
+    const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 
     // --- FILTER LOGIC ---
     const filteredStudents = students.filter(student => {
@@ -252,6 +258,29 @@ const AdminStaff = () => {
         setIsEventModalOpen(true);
     };
 
+    const handleSaveUser = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const userData = Object.fromEntries(formData);
+        
+        try {
+            const res = await api.post('/auth/users/', userData);
+            setUsers([...users, res.data]);
+            setIsUserModalOpen(false);
+            alert("User created successfully");
+        } catch (error) {
+            console.error("Failed to create user", error);
+            alert("Failed to create user. Email or Username might already exist.");
+        }
+    };
+
+    const handleDeleteUser = async (id) => {
+        if(window.confirm("Are you sure you want to delete this user?")) {
+            // await api.delete(`/auth/users/${id}/`);
+            setUsers(users.filter(u => u.id !== id));
+        }
+    };
+
     const handlePrint = () => {
         window.print();
     };
@@ -378,8 +407,9 @@ const AdminStaff = () => {
                     <SidebarItem id="dashboard" icon={FaThLarge} label="Overview" />
                     <SidebarItem id="students" icon={FaUsers} label="Students" />
                     <SidebarItem id="enquiries" icon={FaComment} label="Admissions" />
-                    <SidebarItem id="events" icon={FaCalendarAlt} label="Events" />
+                    {userType !== 'admin' && <SidebarItem id="events" icon={FaCalendarAlt} label="Events" />}
                     <SidebarItem id="careers" icon={FaBriefcase} label="Careers" />
+                    <SidebarItem id="users" icon={FaUserShield} label="Users" />
                     <SidebarItem id="messages" icon={FaEnvelope} label="Contact Msgs" />
                 </div>
 
@@ -421,8 +451,9 @@ const AdminStaff = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                 <StatCard label="Total Students" value={students.length} icon={FaUsers} color="bg-blue-500" onClick={() => setActiveTab('students')} />
                                 <StatCard label="Admissions" value={enquiries.length} icon={FaComment} color="bg-orange-500" onClick={() => setActiveTab('enquiries')} />
-                                <StatCard label="Events" value={events.length} icon={FaCalendarAlt} color="bg-green-500" onClick={() => setActiveTab('events')} />
+                                {userType !== 'admin' && <StatCard label="Events" value={events.length} icon={FaCalendarAlt} color="bg-green-500" onClick={() => setActiveTab('events')} />}
                                 <StatCard label="Career Apps" value={careers.length} icon={FaBriefcase} color="bg-purple-500" onClick={() => setActiveTab('careers')} />
+                                <StatCard label="Staff Users" value={users.length} icon={FaUserShield} color="bg-indigo-500" onClick={() => setActiveTab('users')} />
                             </div>
 
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -684,7 +715,7 @@ const AdminStaff = () => {
                     )}
 
                     {/* --- EVENTS MANAGEMENT --- */}
-                    {activeTab === 'events' && (
+                    {activeTab === 'events' && userType !== 'admin' && (
                         <div className="space-y-6 animate-in fade-in duration-500 no-print">
                             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                                 <div>
@@ -817,6 +848,49 @@ const AdminStaff = () => {
                             </div>
                         </div>
                     )}
+
+                    {/* --- USER MANAGEMENT --- */}
+                    {activeTab === 'users' && (
+                        <div className="space-y-6 animate-in fade-in duration-500 no-print">
+                            <div className="flex justify-between items-center">
+                                <div>
+                                    <h1 className="text-2xl font-bold text-gray-800">User Management</h1>
+                                    <p className="text-gray-500">Manage staff access and accounts.</p>
+                                </div>
+                                <button onClick={() => setIsUserModalOpen(true)} className="flex items-center px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-primary-hover)] transition-colors shadow-md">
+                                    <FaPlus size={18} className="mr-2" /> Add User
+                                </button>
+                            </div>
+                            
+                            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                                <table className="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr className="bg-gray-50 border-b border-gray-100 text-gray-500 text-sm uppercase tracking-wider">
+                                            <th className="p-4 font-semibold">Username</th>
+                                            <th className="p-4 font-semibold">Email</th>
+                                            <th className="p-4 font-semibold">Role</th>
+                                            <th className="p-4 font-semibold text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-50">
+                                        {users.map(user => (
+                                            <tr key={user.id} className="hover:bg-gray-50">
+                                                <td className="p-4 font-bold text-gray-800">{user.username}</td>
+                                                <td className="p-4 text-gray-600">{user.email}</td>
+                                                <td className="p-4"><span className="px-2 py-1 bg-purple-50 text-purple-700 rounded text-xs font-bold uppercase">{user.role || 'Staff'}</span></td>
+                                                <td className="p-4 text-right">
+                                                    <button onClick={() => handleDeleteUser(user.id)} className="text-red-500 hover:bg-red-50 p-2 rounded-lg"><FaTrash size={16} /></button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                        {users.length === 0 && (
+                                            <tr><td colSpan="4" className="p-8 text-center text-gray-500">No users found.</td></tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    )}
                 </main>
             </div>
 
@@ -898,6 +972,31 @@ const AdminStaff = () => {
                     </div>
                 )
             }
+
+            {/* User Add Modal (NO PRINT) */}
+            {isUserModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 no-print">
+                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200">
+                        <div className="p-6 border-b border-gray-100 flex justify-between items-center">
+                            <h2 className="text-xl font-bold text-gray-800">Create Staff Account</h2>
+                            <button onClick={() => setIsUserModalOpen(false)} className="text-gray-400 hover:text-gray-600"><FaTimes size={24} /></button>
+                        </div>
+                        <form onSubmit={handleSaveUser} className="p-6 space-y-4">
+                            <div><label className="block text-sm font-bold text-gray-700 mb-1">Username</label><input name="username" required className="w-full px-3 py-2 border border-gray-300 rounded-lg" /></div>
+                            <div><label className="block text-sm font-bold text-gray-700 mb-1">Email</label><input name="email" type="email" required className="w-full px-3 py-2 border border-gray-300 rounded-lg" /></div>
+                            <div><label className="block text-sm font-bold text-gray-700 mb-1">Password</label><input name="password" type="password" required className="w-full px-3 py-2 border border-gray-300 rounded-lg" /></div>
+                            <div>
+                                <label className="block text-sm font-bold text-gray-700 mb-1">Role</label>
+                                <select name="role" className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white">
+                                    <option value="staff">Staff</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                            <button type="submit" className="w-full py-3 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white rounded-lg font-bold mt-4">Create Account</button>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div >
     );
 };

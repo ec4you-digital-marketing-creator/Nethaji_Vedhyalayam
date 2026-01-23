@@ -21,6 +21,7 @@ const Navbar = () => {
       path: '/about',
       submenu: [
         { title: 'About', path: '/about' },
+        { title: "Chairman's Message", path: '/about/chairman-message' },
         { title: "Principal's Message", path: '/about/principal-message' },
         { title: 'History', path: '/about/history' },
       ],
@@ -79,15 +80,15 @@ const Navbar = () => {
 
       {/* Main Navbar */}
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-32">
+        <div className="flex justify-between items-center h-20 sm:h-24 md:h-28 lg:h-32 py-2">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-4">
+          <Link to="/" className="flex items-center gap-2 sm:gap-4">
             {/* Placeholder for Logo */}
-            <img src={logo} alt="Netaji School" className="h-28 w-auto object-contain" />
+            <img src={logo} alt="Netaji School" className="h-12 sm:h-16 md:h-24 lg:h-28 w-auto object-contain" />
 
             <div className="flex flex-col">
-              <span className="text-2xl font-bold text-secondary leading-tight">NETHAJI</span>
-              <span className="text-xl font-semibold text-primary tracking-wider">VIDHYALAYAM</span>
+              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-secondary leading-tight">NETHAJI</span>
+              <span className="text-[10px] sm:text-xs md:text-lg lg:text-xl font-semibold text-primary tracking-wider">VIDHYALAYAM</span>
             </div>
           </Link>
 

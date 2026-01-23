@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { FaBookOpen, FaHeart, FaPalette, FaMusic, FaUsers, FaCheckCircle } from 'react-icons/fa';
+import SEO from '../components/SEO';
 import nurseryClassroomImage from '../images/C0471T01.JPG';
 
 const Nursery = () => {
@@ -43,9 +44,15 @@ const Nursery = () => {
 
     return (
         <div className="font-sans bg-gray-50">
+            <SEO
+                title="Nursery & Shishuvatika | Early Education at Nethaji Vidyalayam"
+                description="Our Nursery program (Pre-KG to UKG) at Nethaji Vidyalayam focuses on joyful learning and holistic development through the Shishuvatika method in Medavakkam, Chennai."
+                keywords="nursery school Medavakkam, Shishuvatika Chennai, pre-kindergarten Chennai, early childhood education, kids play school Medavakkam, best nursery Chennai"
+                url="/nursery"
+            />
             {/* Hero */}
             <section className="relative h-[400px] flex items-center justify-center text-white">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-95 z-10"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-primary to-secondary opacity-95 z-10"></div>
                 <div
                     className="absolute inset-0 bg-cover bg-center z-0"
                     style={{ backgroundImage: "url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')" }}
@@ -86,6 +93,7 @@ const Nursery = () => {
                                 src={nurseryClassroomImage}
                                 alt="Nursery Classroom"
                                 loading="lazy"
+                                decoding="async"
                                 className="rounded-2xl shadow-2xl"
                             />
                         </div>

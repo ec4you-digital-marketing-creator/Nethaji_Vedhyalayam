@@ -1,0 +1,83 @@
+{% extends 'emails/base_email.html' %}
+
+{% block content %}
+<h2>New Admission Inquiry</h2>
+<p class="message-box">
+    A new admission inquiry has been received from the website.
+</p>
+
+<h3>Student Details</h3>
+<table class="info-table">
+    <tr>
+        <th>Student Name</th>
+        <td>{{ instance.student_name }}</td>
+    </tr>
+    <tr>
+        <th>Gender</th>
+        <td>{{ instance.gender }}</td>
+    </tr>
+    <tr>
+        <th>Date of Birth</th>
+        <td>{{ instance.date_of_birth }}</td>
+    </tr>
+    <tr>
+        <th>Class Applied</th>
+        <td>{{ instance.class_applied }}</td>
+    </tr>
+    <tr>
+        <th>Previous School Data</th>
+        <td>
+            {% if instance.has_previous_schooling %}
+            Yes ({{ instance.previous_school_name }})
+            {% else %}
+            No
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+<h3>Parent Details</h3>
+<table class="info-table">
+    <tr>
+        <th>Father's Name</th>
+        <td>{{ instance.father_name }}</td>
+    </tr>
+    <tr>
+        <th>Father's Occupation</th>
+        <td>{{ instance.father_occupation }}</td>
+    </tr>
+    <tr>
+        <th>Father's Contact</th>
+        <td><a href="tel:{{ instance.father_contact }}">{{ instance.father_contact }}</a></td>
+    </tr>
+    <tr>
+        <th>Mother's Name</th>
+        <td>{{ instance.mother_name }}</td>
+    </tr>
+    <tr>
+        <th>Mother's Occupation</th>
+        <td>{{ instance.mother_occupation }}</td>
+    </tr>
+    <tr>
+        <th>Mother's Contact</th>
+        <td><a href="tel:{{ instance.mother_contact }}">{{ instance.mother_contact }}</a></td>
+    </tr>
+</table>
+
+<h3>Additional Info</h3>
+<table class="info-table">
+    <tr>
+        <th>Address</th>
+        <td>{{ instance.address }}</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>{{ instance.status }}</td>
+    </tr>
+</table>
+
+<div style="text-align: center;">
+    <a href="http://{{ request.get_host }}/admin/admissions/admissioninquiry/{{ instance.id }}/change/"
+        class="button">View in Admin Panel</a>
+</div>
+{% endblock %}

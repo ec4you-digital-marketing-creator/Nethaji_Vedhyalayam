@@ -12,7 +12,6 @@ const ProtectedRoute = ({ children, allowedRoles = [] }) => {
 
     // 2. Check if user has permission (if roles are specified)
     if (allowedRoles.length > 0 && !allowedRoles.includes(userType)) {
-        // If user is a student trying to access staff pages, redirect to home
         return <Navigate to="/" replace />;
     }
 

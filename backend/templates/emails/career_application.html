@@ -1,0 +1,54 @@
+{% extends 'emails/base_email.html' %}
+
+{% block content %}
+<h2>New Career Application</h2>
+<p class="message-box">
+    A new job application has been submitted via the careers page.
+</p>
+
+<h3>Applicant Details</h3>
+<table class="info-table">
+    <tr>
+        <th>Applicant Name</th>
+        <td>{{ instance.name }}</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td><a href="mailto:{{ instance.email }}">{{ instance.email }}</a></td>
+    </tr>
+    <tr>
+        <th>Phone</th>
+        <td><a href="tel:{{ instance.contact_number }}">{{ instance.contact_number }}</a></td>
+    </tr>
+    <tr>
+        <th>Qualification</th>
+        <td>{{ instance.qualification }}</td>
+    </tr>
+    <tr>
+        <th>Experience</th>
+        <td>{{ instance.get_experience_display }}</td>
+    </tr>
+    <tr>
+        <th>Current Position</th>
+        <td>{{ instance.current_position }}</td>
+    </tr>
+    <tr>
+        <th>Roles Applied For</th>
+        <td>
+            {% if instance.position_teaching %}Teaching{% endif %}
+            {% if instance.position_non_teaching %} Non-Teaching{% endif %}
+            {% if instance.position_admin %} Administration{% endif %}
+        </td>
+    </tr>
+</table>
+
+<p>
+    <strong>Resume:</strong> The candidate has uploaded a resume, which is attached to this email. You can also download
+    it from the admin panel below.
+</p>
+
+<div style="text-align: center;">
+    <a href="http://{{ request.get_host }}/admin/contact/careerapplication/{{ instance.id }}/change/"
+        class="button">View Application & Download Resume</a>
+</div>
+{% endblock %}

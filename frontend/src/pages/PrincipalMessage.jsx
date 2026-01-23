@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
+import SEO from '../components/SEO';
 import principalImage from '../images/princi.jpg';
 
 const PrincipalMessage = () => {
@@ -8,6 +9,12 @@ const PrincipalMessage = () => {
     }, []);
     return (
         <div className="font-sans">
+            <SEO
+                title="Principal's Message | Leadership Vision at Nethaji Vidyalayam"
+                description="Read a message from our Principal, Dr. K. Pramila, on our commitment to nurturing young minds with compassion, discipline, and excellence at Nethaji Vidyalayam."
+                keywords="principal message Medavakkam, school leadership, educational vision Chennai, school director message, Nethaji Vidyalayam principal"
+                url="/principal-message"
+            />
             {/* Hero Section */}
             <section className="relative h-[400px] flex items-center justify-center text-center text-white bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')" }}>
                 <div className="absolute inset-0 bg-primary/80 z-10" />
@@ -56,6 +63,7 @@ const PrincipalMessage = () => {
                                     src={principalImage}
                                     alt="Principal Dr.K. PRAMILA"
                                     loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-cover"
                                 />
                             </div>

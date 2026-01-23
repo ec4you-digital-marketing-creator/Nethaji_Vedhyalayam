@@ -1,0 +1,42 @@
+{% extends 'emails/base_email.html' %}
+
+{% block content %}
+<h2>New Contact Message</h2>
+<p class="message-box">
+    You have received a new message via the contact form.
+</p>
+
+<h3>Contact Details</h3>
+<table class="info-table">
+    <tr>
+        <th>Subject</th>
+        <td>{{ instance.get_subject_display }}</td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td>{{ instance.name }}</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td><a href="mailto:{{ instance.email }}">{{ instance.email }}</a></td>
+    </tr>
+    <tr>
+        <th>Phone</th>
+        <td><a href="tel:{{ instance.phone }}">{{ instance.phone }}</a></td>
+    </tr>
+    <tr>
+        <th>Received At</th>
+        <td>{{ instance.created_at|date:"F j, Y, g:i a" }}</td>
+    </tr>
+</table>
+
+<h3>Message Content</h3>
+<div class="message-box">
+    {{ instance.message|linebreaks }}
+</div>
+
+<div style="text-align: center;">
+    <a href="http://{{ request.get_host }}/admin/contact/contactmessage/{{ instance.id }}/change/" class="button">View
+        in Admin Panel</a>
+</div>
+{% endblock %}

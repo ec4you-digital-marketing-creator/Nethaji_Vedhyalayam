@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { FaBullseye, FaCompass, FaHeart, FaShieldAlt, FaBolt, FaUsers, FaArrowRight, FaCheckCircle } from 'react-icons/fa';
-import heroImagePlaceholder from '../images/About/about1.JPG';
+import heroImage from '../images/About/about1.JPG';
 import principalFallback from '../images/DSC07211.JPG';
 import { API_BASE_URL } from '../api/config';
+import ourStoryImage from '../images/About/DSC07104.JPG';
 
 const About = () => {
     const [content, setContent] = useState(null);
@@ -43,15 +45,24 @@ const About = () => {
 
     return (
         <div className="font-sans" >
+            <SEO
+                title="About Nethaji Vidyalayam | Our School History & Mission"
+                description="Explore the rich history and mission of Nethaji Vidyalayam. Established in 2001, we provide holistic education rooted in Bharat culture and academic excellence in Chennai."
+                keywords="about Nethaji Vidyalayam, school mission and vision, educational legacy Chennai, value-based primary education, school history Medavakkam"
+                url="/about"
+            />
             {/* Hero Section */}
-            < section className="relative h-[500px] flex items-center justify-center text-center text-white" >
+            <section className="relative h-[500px] flex items-center justify-center text-center text-white overflow-hidden">
                 <div className="absolute inset-0 bg-black/60 z-10"></div>
-                <div
-                    className="absolute inset-0 bg-cover bg-center z-0"
-                    style={{
-                        backgroundImage: `url(${content?.hero_image ? (content.hero_image.startsWith('http') ? content.hero_image : `${API_BASE_URL}${content.hero_image}`) : heroImagePlaceholder})`
-                    }}
-                ></div>
+                <img
+                    src={heroImage}
+                    alt="Hero"
+                    width="1920"
+                    height="1080"
+                    fetchPriority="high"
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover z-0"
+                />
                 <div className="relative z-20 container mx-auto px-4">
                     <h4 className="text-primary font-bold uppercase tracking-widest mb-4">
                         {content?.hero_sub_title || "Who We Are"}
@@ -116,9 +127,12 @@ const About = () => {
                             <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary rounded-full opacity-20"></div>
                             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-secondary rounded-full opacity-20"></div>
                             <img
-                                src={content?.story_image ? (content.story_image.startsWith('http') ? content.story_image : `${API_BASE_URL}${content.story_image}`) : "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
+                                src={ourStoryImage}
                                 alt="Our Story"
+                                width="800"
+                                height="600"
                                 loading="lazy"
+                                decoding="async"
                                 className="rounded-2xl shadow-2xl relative z-10 w-full"
                             />
                         </div>
@@ -202,7 +216,12 @@ const About = () => {
                             src={content?.principal_image ? (content.principal_image.startsWith('http') ? content.principal_image : `${API_BASE_URL}${content.principal_image}`) : principalFallback}
                             alt="Principal"
                             loading="lazy"
+                            decoding="async"
                             className="w-48 h-48 rounded-full object-cover border-4 border-primary shadow-lg"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = principalFallback;
+                            }}
                         />
                         <div className="text-left">
                             <h3 className="text-2xl font-bold text-secondary">
@@ -214,9 +233,14 @@ const About = () => {
                             <p className="text-gray-600 italic mb-6">
                                 "{content?.principal_quote || "Education is the most powerful weapon which you can use to change the world. At Nethaji, we don't just teach; we inspire."}"
                             </p>
-                            <Link to="/about/principal-message" className="text-secondary font-bold hover:text-primary flex items-center gap-2">
-                                Read Full Message <FaArrowRight size={20} />
-                            </Link>
+                            <div className="flex flex-wrap gap-4">
+                                <Link to="/about/chairman-message" className="text-secondary font-bold hover:text-primary flex items-center gap-2 border-r pr-4 border-gray-300">
+                                    Chairman's Message <FaArrowRight size={18} />
+                                </Link>
+                                <Link to="/about/principal-message" className="text-secondary font-bold hover:text-primary flex items-center gap-2">
+                                    Principal's Message <FaArrowRight size={18} />
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>

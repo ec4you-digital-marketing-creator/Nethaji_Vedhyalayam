@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 import aboutImage1 from "../images/Home/C0451T01.JPG";
 import aboutImage2 from "../images/Home/about2.JPG";
 import aboutImage3 from "../images/Home/about3.JPG";
@@ -21,6 +22,8 @@ import {
   FaHeart,
   FaSmile,
   FaCreditCard,
+  FaCamera,
+  FaSearchPlus
 } from "react-icons/fa";
 
 import { API_BASE_URL } from "../api/config";
@@ -47,6 +50,7 @@ const Home = () => {
   const [events, setEvents] = useState([]);
   const [achievements, setAchievements] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [galleryItems, setGalleryItems] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -88,6 +92,10 @@ const Home = () => {
           const achievementsData = galleryData.filter(item => item.category === 'Achievements');
 
           setEvents(eventsData);
+          setGalleryItems(galleryData.slice(0, 12).map(item => ({
+            ...item,
+            url: item.image ? (item.image.startsWith('http') ? item.image : `${API_BASE_URL}${item.image}`) : null
+          })));
           setAchievements([...achievementsData, {
             title: "Excellence in Education Award 2024",
             image: achivementImage,
@@ -229,8 +237,23 @@ const Home = () => {
     return date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
   };
 
+  const getVisibleGalleryItems = () => {
+    if (galleryItems.length === 0) return [];
+    const items = [];
+    for (let i = 0; i < 3; i++) {
+      items.push(galleryItems[(achievementsCurrentIndex + i) % galleryItems.length]);
+    }
+    return items;
+  };
+
   return (
     <div className="font-sans">
+      <SEO
+        title="Nethaji Vidyalayam | Best School in Medavakkam, Chennai"
+        description="Nethaji Vidyalayam is a premier primary school in Medavakkam, Chennai, offering value-based education from Pre-KG to 5th Grade with modern facilities and Sisuvatika learning."
+        keywords="Nethaji Vidyalayam, best school in Medavakkam, primary school Chennai, value based education Medavakkam, school admissions Chennai 2026"
+        url="/"
+      />
       {/* Hero Section */}
       {/* Hero Section - Professional & Static */}
       <section className="relative h-[600px] md:h-[700px] lg:h-[800px] flex items-center justify-center bg-brand-navy overflow-hidden">
@@ -242,7 +265,7 @@ const Home = () => {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             poster={heroVideo?.thumbnail ? (heroVideo.thumbnail.startsWith('http') ? heroVideo.thumbnail : `${API_BASE_URL}${heroVideo.thumbnail}`) : eventFallbackImage}
             className="w-full h-full object-cover"
           >
@@ -417,7 +440,10 @@ const Home = () => {
                     <img
                       src={homeAbout?.image1 ? (homeAbout.image1.startsWith('http') ? homeAbout.image1 : `${API_BASE_URL}${homeAbout.image1}`) : aboutImage1}
                       alt="School Campus"
+                      width="800"
+                      height="600"
                       loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
@@ -430,7 +456,10 @@ const Home = () => {
                       <img
                         src={homeAbout?.image2 ? (homeAbout.image2.startsWith('http') ? homeAbout.image2 : `${API_BASE_URL}${homeAbout.image2}`) : aboutImage2}
                         alt="Classroom"
+                        width="400"
+                        height="300"
                         loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                     </div>
@@ -440,7 +469,10 @@ const Home = () => {
                       <img
                         src={homeAbout?.image3 ? (homeAbout.image3.startsWith('http') ? homeAbout.image3 : `${API_BASE_URL}${homeAbout.image3}`) : aboutImage3}
                         alt="Laboratory"
+                        width="400"
+                        height="300"
                         loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                     </div>
@@ -454,7 +486,7 @@ const Home = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-brand-navy text-lg uppercase tracking-tight">Excellence</h4>
-                    <p className="text-[10px] text-gray-400 font-bold tracking-[0.2em] uppercase">Estd. 1998</p>
+                    <p className="text-[10px] text-gray-400 font-bold tracking-[0.2em] uppercase">Estd. 2001</p>
                   </div>
                 </div>
               </div>
@@ -492,12 +524,12 @@ const Home = () => {
                 photo: correspondentImage,
               },
               {
-                name: "B.SEKAR",
+                name: "Mr.B.SEKAR",
                 role: "SECRETARY",
                 photo: secretaryImage,
               },
               {
-                name: "Dr.K. PRAMILA",
+                name: "Dr.K.PRAMILA",
                 role: "Principal",
                 photo: principalImage,
               },
@@ -508,7 +540,10 @@ const Home = () => {
                   <img
                     src={leader.photo ? (leader.photo.startsWith('http') ? leader.photo : `${API_BASE_URL}${leader.photo}`) : "https://via.placeholder.com/150"}
                     alt={leader.name}
+                    width="128"
+                    height="128"
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
@@ -601,6 +636,7 @@ const Home = () => {
                       src={event.image ? (event.image.startsWith('http') ? event.image : `${API_BASE_URL}${event.image}`) : eventFallbackImage}
                       alt={event.title}
                       loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4">
@@ -722,56 +758,54 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Achievements Section */}
-      <section className="py-16 md:py-20 bg-white">
+      {/* School Gallery Section */}
+      <section className="py-16 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h4 className="text-primary font-bold uppercase tracking-widest mb-2">
-              Our Pride
+              Visual Journey
             </h4>
-            <h2 className="text-4xl font-bold text-gray-900">
-              Achievements & Accolades
+            <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">
+              Capturing Our Best Moments
             </h2>
           </div>
 
           <div className="hidden md:block relative">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {getVisibleAchievements().map((achievement, index) => (
-                <div
-                  key={`${achievementsCurrentIndex}-${index}`}
+              {getVisibleGalleryItems().map((item, index) => (
+                <Link
+                  to="/gallery"
+                  key={item.id || index}
                   className={`group relative overflow-hidden rounded-xl shadow-lg cursor-pointer ${index === 2 ? 'hidden lg:block' : ''}`}
                 >
                   <img
-                    src={achievement.image ? (achievement.image.startsWith('http') || achievement.image.startsWith('/src') ? achievement.image : `${API_BASE_URL}${achievement.image}`) : achivementImage}
-                    alt={achievement.title}
+                    src={item.url ? (item.url.startsWith('http') ? item.url : `${API_BASE_URL}${item.url}`) : item.url}
+                    alt={item.title}
                     loading="lazy"
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                    <span className="text-primary font-bold text-sm mb-1">
-                      {achievement.date ? new Date(achievement.date).getFullYear() : ''}
-                    </span>
                     <h3 className="text-white text-xl font-bold">
-                      {achievement.title}
+                      {item.title}
                     </h3>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 
             <button
               onClick={prevAchievementsSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-gray-200 hover:bg-gray-300 p-3 rounded-full transition-all"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white/80 hover:bg-white p-3 rounded-full transition-all shadow-md z-20"
               aria-label="Previous"
             >
-              <FaChevronLeft className="w-6 h-6" />
+              <FaChevronLeft className="w-6 h-6 text-primary" />
             </button>
             <button
               onClick={nextAchievementsSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-gray-200 hover:bg-gray-300 p-3 rounded-full transition-all"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white/80 hover:bg-white p-3 rounded-full transition-all shadow-md z-20"
               aria-label="Next"
             >
-              <FaChevronRight className="w-6 h-6" />
+              <FaChevronRight className="w-6 h-6 text-primary" />
             </button>
           </div>
 
@@ -783,24 +817,21 @@ const Home = () => {
                   transform: `translateX(-${achievementsCurrentIndex * 100}%)`,
                 }}
               >
-                {achievements.map((achievement, index) => (
+                {galleryItems.map((item, index) => (
                   <div key={index} className="w-full shrink-0 px-4">
-                    <div className="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer">
+                    <Link to="/gallery" className="group relative overflow-hidden rounded-xl shadow-lg block">
                       <img
-                        src={achievement.image ? (achievement.image.startsWith('http') || achievement.image.startsWith('/src') ? achievement.image : `${API_BASE_URL}${achievement.image}`) : achivementImage}
-                        alt={achievement.title}
+                        src={item.url ? (item.url.startsWith('http') ? item.url : `${API_BASE_URL}${item.url}`) : item.url}
+                        alt={item.title}
                         loading="lazy"
                         className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-linear-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                        <span className="text-primary font-bold text-sm mb-1">
-                          {achievement.date ? new Date(achievement.date).getFullYear() : ''}
-                        </span>
                         <h3 className="text-white text-xl font-bold">
-                          {achievement.title}
+                          {item.title}
                         </h3>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -808,22 +839,22 @@ const Home = () => {
 
             <button
               onClick={prevAchievementsSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full transition-all"
+              className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md z-20"
               aria-label="Previous"
             >
-              <FaChevronLeft className="w-5 h-5" />
+              <FaChevronLeft className="w-5 h-5 text-primary" />
             </button>
             <button
               onClick={nextAchievementsSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 p-2 rounded-full transition-all"
+              className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-md z-20"
               aria-label="Next"
             >
-              <FaChevronRight className="w-5 h-5" />
+              <FaChevronRight className="w-5 h-5 text-primary" />
             </button>
           </div>
 
           <div className="flex justify-center gap-2 mt-8">
-            {achievements.map((_, index) => (
+            {galleryItems.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToAchievementsSlide(index)}
@@ -851,11 +882,12 @@ const Home = () => {
               to="/gallery"
               className="inline-block border-2 border-primary text-primary px-8 py-3 rounded-full font-bold hover:bg-primary hover:text-white transition-colors"
             >
-              View All Achievements
+              View Full Gallery
             </Link>
           </div>
         </div>
       </section>
+
 
       {/* Testimonials Section */}
       {/* <section className="py-20 bg-gray-50">
@@ -939,7 +971,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </div>
+    </div >
   );
 };
 

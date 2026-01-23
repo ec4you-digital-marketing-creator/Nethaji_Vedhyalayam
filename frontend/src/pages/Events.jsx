@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaArrowRight, FaTimes, FaFilter } from 'react-icons/fa';
+import SEO from '../components/SEO';
 import api from '../api/config';
 import { API_BASE_URL } from '../api/config';
 import eventsBannerImage from '../images/C0475T01.JPG';
@@ -39,13 +40,21 @@ const Events = () => {
 
     return (
         <div className="bg-gray-50 min-h-screen pb-20">
+            <SEO
+                title="Upcoming School Events | Nethaji Vidyalayam, Medavakkam"
+                description="Stay updated with upcoming school events, cultural celebrations, and academic workshops at Nethaji Vidyalayam, Medavakkam. Explore our vibrant student community activities."
+                keywords="school events Medavakkam, Nethaji Vidyalayam activities, school cultural events, academic calendar Chennai, student participation events"
+                url="/events"
+            />
 
             {/* Hero Section */}
-            <div className="relativePath relative h-[400px] bg-[var(--color-brand-navy)] overflow-hidden">
+            <div className="relativePath relative h-[400px] bg-brand-navy overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 z-10"></div>
                 <img
                     src={eventsBannerImage}
                     alt="Events Banner"
+                    fetchPriority="high"
+                    decoding="async"
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
@@ -77,8 +86,8 @@ const Events = () => {
                                 className={`
                             px-5 py-2 rounded-full text-sm font-medium transition-all duration-300
                             ${selectedCategory === category
-                                        ? 'bg-[var(--color-brand-navy)] text-white shadow-md'
-                                        : 'bg-gray-50 text-gray-600 hover:bg-gray-100 hover:text-[var(--color-primary)]'}
+                                        ? 'bg-brand-navy text-white shadow-md'
+                                        : 'bg-gray-50 text-gray-600 hover:bg-gray-100 hover:text-primary'}
                         `}
                             >
                                 {category}
@@ -103,36 +112,37 @@ const Events = () => {
                                         src={event.image ? (event.image.startsWith('http') ? event.image : `${API_BASE_URL}${event.image}`) : 'https://via.placeholder.com/400x300'}
                                         alt={event.title}
                                         loading="lazy"
+                                        decoding="async"
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                     <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm p-3 rounded-xl shadow-sm text-center min-w-[70px]">
                                         <p className="text-xs font-bold text-gray-500 uppercase">
                                             {new Date(event.date).toLocaleString('default', { month: 'short' })}
                                         </p>
-                                        <p className="text-xl font-bold text-[var(--color-brand-navy)] leading-none mt-1">
+                                        <p className="text-xl font-bold text-brand-navy leading-none mt-1">
                                             {new Date(event.date).getDate()}
                                         </p>
                                     </div>
                                     <div className="absolute top-4 right-4">
-                                        <span className="px-3 py-1 bg-[var(--color-primary)] text-white text-xs font-bold rounded-full shadow-sm">
+                                        <span className="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full shadow-sm">
                                             {event.category}
                                         </span>
                                     </div>
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-6 flex-grow flex flex-col">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors line-clamp-2">
+                                <div className="p-6 grow flex flex-col">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
                                         {event.title}
                                     </h3>
 
                                     <div className="space-y-3 mb-6">
                                         <div className="flex items-start text-gray-600 text-sm">
-                                            <FaClock className="w-4 h-4 mr-3 mt-0.5 text-[var(--color-primary)]" />
+                                            <FaClock className="w-4 h-4 mr-3 mt-0.5 text-primary" />
                                             <span>{event.time}</span>
                                         </div>
                                         <div className="flex items-start text-gray-600 text-sm">
-                                            <FaMapMarkerAlt className="w-4 h-4 mr-3 mt-0.5 text-[var(--color-primary)]" />
+                                            <FaMapMarkerAlt className="w-4 h-4 mr-3 mt-0.5 text-primary" />
                                             <span>{event.location}</span>
                                         </div>
                                     </div>
@@ -144,7 +154,7 @@ const Events = () => {
                                     <div className="mt-auto">
                                         <button
                                             onClick={() => setSelectedEvent(event)}
-                                            className="w-full py-3 px-4 bg-gray-50 hover:bg-[var(--color-brand-navy)] hover:text-white text-[var(--color-brand-navy)] font-semibold rounded-xl transition-all duration-300 flex items-center justify-center group/btn"
+                                            className="w-full py-3 px-4 bg-gray-50 hover:bg-brand-navy hover:text-white text-brand-navy font-semibold rounded-xl transition-all duration-300 flex items-center justify-center group/btn"
                                         >
                                             View Details
                                             <FaArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
@@ -161,7 +171,7 @@ const Events = () => {
                         <p className="text-gray-500 text-lg">No events found in this category.</p>
                         <button
                             onClick={() => setSelectedCategory("All")}
-                            className="mt-4 text-[var(--color-primary)] font-medium hover:underline"
+                            className="mt-4 text-primary font-medium hover:underline"
                         >
                             View all events
                         </button>
@@ -190,11 +200,12 @@ const Events = () => {
                                     src={selectedEvent.image ? (selectedEvent.image.startsWith('http') ? selectedEvent.image : `${API_BASE_URL}${selectedEvent.image}`) : 'https://via.placeholder.com/400x300'}
                                     alt={selectedEvent.title}
                                     loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-cover"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent md:hidden"></div>
+                                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent md:hidden"></div>
                                 <div className="absolute bottom-4 left-4 right-4 md:hidden text-white">
-                                    <span className="inline-block px-3 py-1 bg-[var(--color-primary)] text-xs font-bold rounded-full mb-2">
+                                    <span className="inline-block px-3 py-1 bg-primary text-xs font-bold rounded-full mb-2">
                                         {selectedEvent.category}
                                     </span>
                                     <h2 className="text-2xl font-bold leading-tight">{selectedEvent.title}</h2>
@@ -203,7 +214,7 @@ const Events = () => {
 
                             <div className="p-8 md:p-10 bg-white">
                                 <div className="hidden md:block mb-6">
-                                    <span className="inline-block px-3 py-1 bg-blue-50 text-[var(--color-brand-navy)] text-xs font-bold rounded-full tracking-wide">
+                                    <span className="inline-block px-3 py-1 bg-blue-50 text-brand-navy text-xs font-bold rounded-full tracking-wide">
                                         {selectedEvent.category}
                                     </span>
                                 </div>
@@ -214,7 +225,7 @@ const Events = () => {
 
                                 <div className="space-y-4 mb-8">
                                     <div className="flex items-center text-gray-700">
-                                        <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center mr-4 text-[var(--color-primary)]">
+                                        <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center mr-4 text-primary">
                                             <FaCalendarAlt size={20} />
                                         </div>
                                         <div>
@@ -225,7 +236,7 @@ const Events = () => {
                                         </div>
                                     </div>
                                     <div className="flex items-center text-gray-700">
-                                        <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mr-4 text-[var(--color-brand-navy)]">
+                                        <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mr-4 text-brand-navy">
                                             <FaClock size={20} />
                                         </div>
                                         <div>

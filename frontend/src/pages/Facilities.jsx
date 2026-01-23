@@ -4,7 +4,9 @@ import {
     FaCheckCircle, FaAward, FaWifi, FaBolt, FaLeaf, FaCamera, FaStar, FaFire, FaMedkit
 } from 'react-icons/fa';
 import { FaRegIdCard } from "react-icons/fa6";
+import SEO from '../components/SEO';
 import { API_BASE_URL } from '../api/config';
+import INTRO from '../images/Home/about2.JPG';
 
 const Facilities = () => {
     const [pageContent, setPageContent] = useState(null);
@@ -60,12 +62,18 @@ const Facilities = () => {
 
     return (
         <div className="font-sans bg-gray-50">
+            <SEO
+                title="Modern School Facilities | Nethaji Vidyalayam Infrastructure"
+                description="Explore the top-tier school facilities at Nethaji Vidyalayam, Medavakkam. We offer smart classrooms, a science lab, library, and safe transport to enhance student learning."
+                keywords="school facilities Medavakkam, Nethaji Vidyalayam infrastructure, smart classrooms Chennai, school library, safe transport school"
+                url="/facilities"
+            />
             {/* Hero */}
             <section className="relative h-[400px] flex items-center justify-center text-white">
                 <div className="absolute inset-0 bg-secondary/90 z-10"></div>
                 <div
                     className="absolute inset-0 bg-cover bg-center z-0"
-                    style={{ backgroundImage: `url(${pageContent?.hero_image ? (pageContent.hero_image.startsWith('http') ? pageContent.hero_image : `${API_BASE_URL}${pageContent.hero_image}`) : "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"})` }}
+                    style={{ backgroundImage: `url(${INTRO})` }}
                 ></div>
                 <div className="relative z-20 container mx-auto px-4 text-center">
                     <h1 className="text-5xl font-bold mb-4">{pageContent?.hero_title || "Our Facilities"}</h1>
@@ -118,6 +126,7 @@ const Facilities = () => {
                                             src={facility.image ? (facility.image.startsWith('http') ? facility.image : `${API_BASE_URL}${facility.image}`) : "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
                                             alt={facility.title}
                                             loading="lazy"
+                                            decoding="async"
                                             className="w-full h-[400px] object-cover transform group-hover:scale-110 transition-transform duration-700"
                                         />
                                     </div>
@@ -246,7 +255,7 @@ const Facilities = () => {
             </section> */}
 
             {/* Certifications */}
-            <section className="py-16 bg-white">
+            {/* <section className="py-16 bg-white">
                 <div className="container mx-auto px-4 text-center">
                     <h3 className="text-2xl font-bold text-gray-800 mb-8">Certified & Accredited</h3>
                     <div className="flex flex-wrap justify-center items-center gap-8">
@@ -258,7 +267,7 @@ const Facilities = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* Virtual Tour CTA */}
             <section className="py-20 bg-primary text-white text-center">

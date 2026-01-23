@@ -1,0 +1,36 @@
+{% extends 'emails/base_email.html' %}
+
+{% block content %}
+<div class="message-box">
+    <p>Dear Administrator,</p>
+    <p>A new fee payment initiation has been received. Here are the details:</p>
+</div>
+
+<div class="section-title">Student Details</div>
+<table class="details-table">
+    <tr>
+        <th>Student Name</th>
+        <td>{{ instance.student_name }}</td>
+    </tr>
+    <tr>
+        <th>Parent Name</th>
+        <td>{{ instance.parent_name }}</td>
+    </tr>
+    <tr>
+        <th>Phone Number</th>
+        <td><a href="tel:{{ instance.phone_number }}">{{ instance.phone_number }}</a></td>
+    </tr>
+    <tr>
+        <th>Grade</th>
+        <td>{{ instance.grade }}</td>
+    </tr>
+    <tr>
+        <th>Section</th>
+        <td>{{ instance.section }}</td>
+    </tr>
+</table>
+
+<p style="text-align: center; margin-top: 20px; font-size: 14px; color: #666;">
+    <em>This payment was initiated via the website FeeDesk.</em>
+</p>
+{% endblock %}

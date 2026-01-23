@@ -87,9 +87,40 @@ class PosterViewSet(viewsets.ReadOnlyModelViewSet):
             return Response(serializer.data)
         return Response({})
 
+from django.conf import settings
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 class FeePaymentCreateView(generics.CreateAPIView):
     queryset = FeePayment.objects.all()
     serializer_class = FeePaymentSerializer
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        
+        # Send Email Notification
+        subject = f"New Fee Payment Initiated: {instance.student_name} - Grade {instance.grade}"
+        
+        # Render HTML content
+        html_message = render_to_string('emails/fee_payment.html', {'instance': instance, 'request': self.request})
+        plain_message = strip_tags(html_message)
+        
+        recipient_list = ['nethajividhyalayam2016@gmail.com']
+        
+        try:
+            print(f"Sending fee payment email to {recipient_list}...")
+            email = EmailMultiAlternatives(
+                subject,
+                plain_message,
+                settings.DEFAULT_FROM_EMAIL,
+                recipient_list
+            )
+            email.attach_alternative(html_message, "text/html")
+            email.send(fail_silently=False)
+            print("Fee payment email sent successfully.")
+        except Exception as e:
+            print(f"ERROR: Failed to send fee payment email: {e}")
 
 class PaymentQRView(generics.RetrieveAPIView):
     queryset = PaymentQR.objects.filter(is_active=True).order_by('-created_at')

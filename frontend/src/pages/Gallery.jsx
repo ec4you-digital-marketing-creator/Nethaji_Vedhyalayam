@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaCamera, FaSearchPlus, FaInfoCircle } from 'react-icons/fa';
+import SEO from '../components/SEO';
 import api from '../api/config';
 import { API_BASE_URL } from '../api/config';
 
@@ -56,7 +57,7 @@ const Gallery = () => {
     if (images.length === 0) {
         return (
             <div className="bg-gray-50 min-h-screen pb-16">
-                <div className="bg-[var(--color-brand-navy)] text-white py-12 px-6 text-center">
+                <div className="bg-brand-navy text-white py-12 px-6 text-center">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-serif">School Gallery</h1>
                     <p className="text-gray-200 max-w-2xl mx-auto text-lg opacity-90">
                         A glimpse into the vibrant life at Nethaji Vedhyalayam.
@@ -71,9 +72,15 @@ const Gallery = () => {
 
     return (
         <div className="bg-gray-50 min-h-screen pb-16">
+            <SEO
+                title="Nethaji Vidyalayam Photo Gallery | School Life & Activities"
+                description="Take a visual journey through Nethaji Vidyalayam. View photos of our campus, student activities, events, and academic achievements in our vibrant school gallery."
+                keywords="school photo gallery Chennai, Nethaji Vidyalayam campus photos, student activities gallery, school event pictures, academic achievements photos"
+                url="/gallery"
+            />
             {/* Header Section */}
-            <div className="bg-[var(--color-brand-navy)] text-white py-12 px-6 text-center">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-serif">School Gallery</h1>
+            <div className="bg-brand-navy text-white py-12 px-6 text-center">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-serif">Nethaji Vidyalayam School Gallery</h1>
                 <p className="text-gray-200 max-w-2xl mx-auto text-lg opacity-90">
                     A glimpse into the vibrant life at Nethaji Vedhyalayam, from academic achievements to cultural celebrations.
                 </p>
@@ -93,13 +100,15 @@ const Gallery = () => {
                                 <img
                                     src={selectedImage?.url || 'https://via.placeholder.com/800x600'}
                                     alt={selectedImage?.title}
+                                    fetchPriority="high"
+                                    decoding="async"
                                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                                 />
                             </div>
 
                             {/* Overlay for Title on Mobile */}
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 lg:hidden">
-                                <span className="inline-block px-3 py-1 bg-[var(--color-primary)] text-white text-xs font-semibold rounded-full mb-2">
+                            <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-6 lg:hidden">
+                                <span className="inline-block px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full mb-2">
                                     {selectedImage?.category}
                                 </span>
                                 <h2 className="text-2xl font-bold text-white">{selectedImage?.title}</h2>
@@ -110,7 +119,7 @@ const Gallery = () => {
                         <div className="p-8 lg:p-10 flex flex-col justify-center bg-white relative">
                             <div className={`transition-all duration-300 ${isAnimating ? 'translate-y-4 opacity-0' : 'translate-y-0 opacity-100'}`}>
                                 <div className="hidden lg:block mb-4">
-                                    <span className="inline-block px-4 py-1.5 bg-orange-50 text-[var(--color-primary)] text-sm font-bold tracking-wide rounded-full border border-orange-100">
+                                    <span className="inline-block px-4 py-1.5 bg-orange-50 text-primary text-sm font-bold tracking-wide rounded-full border border-orange-100">
                                         {selectedImage?.category}
                                     </span>
                                 </div>
@@ -120,7 +129,7 @@ const Gallery = () => {
                                 </h2>
 
                                 <div className="flex items-start space-x-4 mb-8">
-                                    <FaInfoCircle className="w-6 h-6 text-gray-400 mt-1 flex-shrink-0" />
+                                    <FaInfoCircle className="w-6 h-6 text-gray-400 mt-1 shrink-0" />
                                     <p className="text-gray-600 text-lg leading-relaxed">
                                         {selectedImage?.description}
                                     </p>
@@ -138,20 +147,21 @@ const Gallery = () => {
                             onClick={() => handleImageClick(image)}
                             className={`
                 group cursor-pointer relative rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300
-                ${selectedImage && selectedImage.id === image.id ? 'ring-4 ring-[var(--color-primary)] ring-offset-2 scale-[1.02]' : 'hover:-translate-y-1'}
+                ${selectedImage && selectedImage.id === image.id ? 'ring-4 ring-primary ring-offset-2 scale-[1.02]' : 'hover:-translate-y-1'}
               `}
                         >
-                            <div className="aspect-[4/3] bg-gray-200 overflow-hidden">
+                            <div className="aspect-4/3 bg-gray-200 overflow-hidden">
                                 <img
                                     src={image.url || 'https://via.placeholder.com/400x300'}
                                     alt={image.title}
                                     loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 />
                             </div>
 
                             {/* Card Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                            <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                                 <p className="text-white font-medium text-lg translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                     {image.title}
                                 </p>
@@ -160,7 +170,7 @@ const Gallery = () => {
 
                             {/* Selected Indicator Icon */}
                             {selectedImage && selectedImage.id === image.id && (
-                                <div className="absolute top-3 right-3 bg-white/90 text-[var(--color-primary)] p-2 rounded-full shadow-lg">
+                                <div className="absolute top-3 right-3 bg-white/90 text-primary p-2 rounded-full shadow-lg">
                                     <FaSearchPlus size={18} />
                                 </div>
                             )}

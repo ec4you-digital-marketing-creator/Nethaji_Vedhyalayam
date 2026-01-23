@@ -22,6 +22,9 @@ const AdmissionEnquiry = lazy(() => import('./pages/AdmissionEnquiry'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const Events = lazy(() => import('./pages/Events'));
 const AdminStaff = lazy(() => import('./pages/AdminStaff'));
+const ChairmanMessage = lazy(() => import('./pages/ChairmanMessage'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 import ProtectedRoute from './components/ProtectedRoute';
 import Poster from './components/Poster';
 
@@ -93,9 +96,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/pay-fees" element={<PayFees />} />
             <Route path="/about/principal-message" element={<PrincipalMessage />} />
-            <Route path="/about/principal-message" element={<PrincipalMessage />} />
+            <Route path="/about/chairman-message" element={<ChairmanMessage />} />
             <Route path="/about/history" element={<History />} />
             <Route path="/career" element={<Career />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
 
           </Route>
 
@@ -103,7 +108,7 @@ function App() {
           <Route
             path="/admin/dashboard"
             element={
-              <ProtectedRoute allowedRoles={['staff']}>
+              <ProtectedRoute allowedRoles={['staff', 'admin']}>
                 <AdminStaff />
               </ProtectedRoute>
             }
@@ -112,7 +117,7 @@ function App() {
         </Routes>
       </Suspense>
       {showPoster && (
-        <div className="fixed inset-0 z-[9999] bg-black/5 backdrop-blur-xs overflow-y-auto">
+        <div className="fixed inset-0 z-9999 bg-black/5 backdrop-blur-xs overflow-y-auto">
           <Poster data={posterData} onClose={() => setShowPoster(false)} />
         </div>
       )}

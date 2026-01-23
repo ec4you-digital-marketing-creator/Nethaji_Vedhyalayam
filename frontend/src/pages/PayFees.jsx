@@ -186,7 +186,7 @@ const PayFees = () => {
                     <option value="pre-kg">Pre-KG</option>
                     <option value="lkg">LKG</option>
                     <option value="ukg">UKG</option>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((g) => (
+                    {[1, 2, 3, 4, 5].map((g) => (
                       <option key={g} value={g}>Grade {g}</option>
                     ))}
                   </select>
@@ -231,8 +231,8 @@ const PayFees = () => {
                 type="submit"
                 disabled={!isFormValid || isLoading}
                 className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg text-lg transform transition-all ${isFormValid && !isLoading
-                    ? "bg-linear-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary text-white hover:-translate-y-1 cursor-pointer"
-                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                  ? "bg-linear-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary text-white hover:-translate-y-1 cursor-pointer"
+                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
                   }`}
               >
                 {isLoading ? "Processing..." : "Next"} <FaArrowRight size={18} />
@@ -265,6 +265,9 @@ const PayFees = () => {
                 <div className="space-y-4">
                   <p className="text-sm text-gray-500 italic">
                     Scan using any UPI app (GPay, PhonePe, Paytm)
+                  </p>
+                  <p className="text-md font-bold text-gray-700 mt-2">
+                    For Queries: +91 9444662739
                   </p>
                 </div>
               </div>

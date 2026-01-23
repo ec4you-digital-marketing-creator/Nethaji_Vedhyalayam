@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaArrowRight, FaCalendarAlt, FaAward, FaChartLine, FaBuilding } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { API_BASE_URL } from '../api/config';
 
 const History = () => {
@@ -41,6 +42,12 @@ const History = () => {
 
     return (
         <div className="font-sans bg-gray-50">
+            <SEO
+                title="History of Nethaji Vidyalayam | Foundations & Growth Story"
+                description="Learn the history of Nethaji Vidyalayam, Medavakkam. Since 2001, we have grown from a small group of students to a leading primary school in Chennai with a rich legacy."
+                keywords="school history Medavakkam, educational journey Chennai, Nethaji Vidyalayam milestones, school founder story, legacy of excellence"
+                url="/history"
+            />
             {/* Hero Section */}
             <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center text-center text-white overflow-hidden">
                 <div className="absolute inset-0 bg-secondary/90 z-10"></div>
@@ -118,6 +125,7 @@ const History = () => {
                                             src={item.image ? (item.image.startsWith('http') ? item.image : `${API_BASE_URL}${item.image}`) : "https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
                                             alt={item.title}
                                             loading="lazy"
+                                            decoding="async"
                                             className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                                         />
                                     </div>

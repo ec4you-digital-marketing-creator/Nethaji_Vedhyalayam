@@ -1,6 +1,10 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from django.core.mail import send_mail
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from .models import (AdmissionsPageContent, AdmissionStep, AgeCriterion, 
                     RequiredDocument, AdmissionsFAQ, AdmissionInquiry)
 from .serializers import (AdmissionsPageContentSerializer, AdmissionStepSerializer, 
@@ -38,3 +42,29 @@ class AdmissionsFAQViewSet(viewsets.ReadOnlyModelViewSet):
 class AdmissionInquiryViewSet(viewsets.ModelViewSet):
     queryset = AdmissionInquiry.objects.all()
     serializer_class = AdmissionInquirySerializer
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        
+        # Send Email Notification
+        subject = f"New Admission Inquiry: {instance.student_name} - Class {instance.class_applied}"
+        
+        # Render HTML content
+        html_message = render_to_string('emails/admission_inquiry.html', {'instance': instance, 'request': self.request})
+        plain_message = strip_tags(html_message)
+        
+        recipient_list = ['nethajividhyalayam2016@gmail.com']
+        
+        try:
+            print(f"Sending admission email to {recipient_list}...")
+            send_mail(
+                subject, 
+                plain_message, 
+                settings.DEFAULT_FROM_EMAIL, 
+                recipient_list, 
+                html_message=html_message,
+                fail_silently=False
+            )
+            print("Admission email sent successfully.")
+        except Exception as e:
+            print(f"ERROR: Failed to send admission email: {e}")
