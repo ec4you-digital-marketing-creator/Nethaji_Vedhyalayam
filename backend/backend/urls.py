@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/admin/')),
     path('admin/', admin.site.urls),
     path('api/core/', include('core.urls')),
     path('api/gallery/', include('gallery.urls')),
@@ -29,6 +31,7 @@ urlpatterns = [
     path('api/administration/', include('administration.urls')),
     path('api/events/', include('events.urls')),
     path('api/contact/', include('contact.urls')),
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
 ]
 
 if settings.DEBUG:

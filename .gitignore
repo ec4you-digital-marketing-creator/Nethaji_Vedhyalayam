@@ -52,3 +52,7 @@ backend/media/hero_videos/Nethaji_Final.mp4
 *.rar
 
 *.mov
+
+# Large files
+frontend/dist.zip
+*.zip

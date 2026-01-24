@@ -2,4 +2,5 @@ django>=6.0
 djangorestframework
 django-cors-headers
 Pillow
-django-ckeditor
+django-ckeditor-5
+mysqlclient

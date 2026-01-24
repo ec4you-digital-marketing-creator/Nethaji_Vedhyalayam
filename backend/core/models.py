@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 class HeroVideo(models.Model):
     title = models.CharField(max_length=200, default="Welcome to Nethaji Vidyalayam")
@@ -19,7 +19,7 @@ class HeroVideo(models.Model):
 class HomeAbout(models.Model):
     sub_heading = models.CharField(max_length=200, default="Welcome to Nethaji")
     heading = models.CharField(max_length=200, default="Nurturing the Future Leaders")
-    description = RichTextField(help_text="Provide the about section description.")
+    description = CKEditor5Field('Description', config_name='extends', help_text="Provide the about section description.")
     button_text = models.CharField(max_length=100, default="Discover Our Story")
     button_link = models.CharField(max_length=200, default="/about")
     
@@ -97,7 +97,7 @@ class AboutPageContent(models.Model):
     # Our Story Section
     story_sub_heading = models.CharField(max_length=200, default="Our Story")
     story_heading = models.CharField(max_length=200, default="From Humble Beginnings to Educational Excellence")
-    story_description = RichTextField()
+    story_description = CKEditor5Field('Our Story', config_name='extends')
     story_image = models.ImageField(upload_to='about_page/', blank=True, null=True)
     
     # Stats
@@ -108,7 +108,7 @@ class AboutPageContent(models.Model):
 
     # Vision & Mission
     vision_text = models.TextField(default="To be a global leader in education, fostering a culture of innovation, integrity, and inclusivity, where every student is empowered to realize their full potential.")
-    mission_text = RichTextField(default="<ul><li>Provide a safe and stimulating learning environment.</li><li>Encourage critical thinking and creativity.</li><li>Instill strong moral values and social responsibility.</li></ul>", help_text="Use a bulleted list for mission items.")
+    mission_text = CKEditor5Field('Mission', config_name='extends', default="<ul><li>Provide a safe and stimulating learning environment.</li><li>Encourage critical thinking and creativity.</li><li>Instill strong moral values and social responsibility.</li></ul>", help_text="Use a bulleted list for mission items.")
 
     # Leadership Preview
     principal_image = models.ImageField(upload_to='about_page/', blank=True, null=True)

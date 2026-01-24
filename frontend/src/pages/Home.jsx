@@ -271,7 +271,7 @@ const Home = () => {
           >
             <source
               src={heroVideo?.video_file
-                ? (heroVideo.video_file.startsWith('http') ? heroVideo.video_file : `${API_BASE_URL}${heroVideo.video_file}`)
+                ? (heroVideo.video_file.startsWith('http') ? heroVideo.video_file : (heroVideo.video_file.startsWith('/media') ? `${API_BASE_URL}${heroVideo.video_file}` : heroVideo.video_file))
                 : (heroVideo?.video_url || heroFallbackVideo)}
               type="video/mp4"
             />
@@ -438,7 +438,7 @@ const Home = () => {
                 <div className="col-span-12 md:col-span-7 h-full relative group">
                   <div className="h-full rounded-3xl overflow-hidden shadow-2xl">
                     <img
-                      src={homeAbout?.image1 ? (homeAbout.image1.startsWith('http') ? homeAbout.image1 : `${API_BASE_URL}${homeAbout.image1}`) : aboutImage1}
+                      src={homeAbout?.image1 ? (homeAbout.image1.startsWith('http') ? homeAbout.image1 : (homeAbout.image1.startsWith('/media') ? `${API_BASE_URL}${homeAbout.image1}` : homeAbout.image1)) : aboutImage1}
                       alt="School Campus"
                       width="800"
                       height="600"
@@ -454,7 +454,7 @@ const Home = () => {
                   <div className="h-1/2 relative group">
                     <div className="h-full rounded-3xl overflow-hidden shadow-xl">
                       <img
-                        src={homeAbout?.image2 ? (homeAbout.image2.startsWith('http') ? homeAbout.image2 : `${API_BASE_URL}${homeAbout.image2}`) : aboutImage2}
+                        src={homeAbout?.image2 ? (homeAbout.image2.startsWith('http') ? homeAbout.image2 : (homeAbout.image2.startsWith('/media') ? `${API_BASE_URL}${homeAbout.image2}` : homeAbout.image2)) : aboutImage2}
                         alt="Classroom"
                         width="400"
                         height="300"
@@ -467,7 +467,7 @@ const Home = () => {
                   <div className="h-1/2 relative group">
                     <div className="h-full rounded-3xl overflow-hidden shadow-xl">
                       <img
-                        src={homeAbout?.image3 ? (homeAbout.image3.startsWith('http') ? homeAbout.image3 : `${API_BASE_URL}${homeAbout.image3}`) : aboutImage3}
+                        src={homeAbout?.image3 ? (homeAbout.image3.startsWith('http') ? homeAbout.image3 : (homeAbout.image3.startsWith('/media') ? `${API_BASE_URL}${homeAbout.image3}` : homeAbout.image3)) : aboutImage3}
                         alt="Laboratory"
                         width="400"
                         height="300"
@@ -538,7 +538,7 @@ const Home = () => {
                 {/* Image - Placed OUTSIDE the masked container */}
                 <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full overflow-hidden border-4 border-white/20 group-hover:border-primary transition-colors shadow-lg z-20">
                   <img
-                    src={leader.photo ? (leader.photo.startsWith('http') ? leader.photo : `${API_BASE_URL}${leader.photo}`) : "https://via.placeholder.com/150"}
+                    src={leader.photo ? (leader.photo.startsWith('http') ? leader.photo : (leader.photo.startsWith('/media') ? `${API_BASE_URL}${leader.photo}` : leader.photo)) : "https://via.placeholder.com/150"}
                     alt={leader.name}
                     width="128"
                     height="128"
@@ -633,7 +633,7 @@ const Home = () => {
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img
-                      src={event.image ? (event.image.startsWith('http') ? event.image : `${API_BASE_URL}${event.image}`) : eventFallbackImage}
+                      src={event.image ? (event.image.startsWith('http') ? event.image : (event.image.startsWith('/media') ? `${API_BASE_URL}${event.image}` : event.image)) : eventFallbackImage}
                       alt={event.title}
                       loading="lazy"
                       decoding="async"
@@ -682,7 +682,7 @@ const Home = () => {
                     <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 overflow-hidden">
                       <div className="relative h-56 overflow-hidden">
                         <img
-                          src={event.image ? (event.image.startsWith('http') ? event.image : `${API_BASE_URL}${event.image}`) : eventFallbackImage}
+                          src={event.image ? (event.image.startsWith('http') ? event.image : (event.image.startsWith('/media') ? `${API_BASE_URL}${event.image}` : event.image)) : eventFallbackImage}
                           alt={event.title}
                           loading="lazy"
                           className="w-full h-full object-cover"
@@ -779,7 +779,7 @@ const Home = () => {
                   className={`group relative overflow-hidden rounded-xl shadow-lg cursor-pointer ${index === 2 ? 'hidden lg:block' : ''}`}
                 >
                   <img
-                    src={item.url ? (item.url.startsWith('http') ? item.url : `${API_BASE_URL}${item.url}`) : item.url}
+                    src={item.url ? (item.url.startsWith('http') ? item.url : (item.url.startsWith('/media') ? `${API_BASE_URL}${item.url}` : item.url)) : item.url}
                     alt={item.title}
                     loading="lazy"
                     className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
