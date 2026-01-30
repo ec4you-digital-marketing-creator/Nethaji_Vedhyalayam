@@ -8,7 +8,7 @@ import {
   FaLayerGroup,
   FaArrowRight,
 } from "react-icons/fa";
-import api, { API_BASE_URL } from "../api/config";
+import api, { API_BASE_URL, getImageUrl } from "../api/config";
 import defaultQrImage from "../images/payment-qr.png"; // Fallback
 
 const PayFees = () => {
@@ -82,12 +82,7 @@ const PayFees = () => {
   };
 
   const getQRImageUrl = () => {
-    if (qrData && qrData.qr_image) {
-      // Check if full URL or relative path
-      if (qrData.qr_image.startsWith("http")) return qrData.qr_image;
-      return `${API_BASE_URL}${qrData.qr_image}`;
-    }
-    return defaultQrImage;
+    return getImageUrl(qrData?.qr_image) || defaultQrImage;
   };
 
   return (

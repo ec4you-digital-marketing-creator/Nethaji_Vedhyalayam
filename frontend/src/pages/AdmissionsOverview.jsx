@@ -11,7 +11,7 @@ import {
   FaQuestionCircle,
   FaDownload,
 } from "react-icons/fa";
-import { API_BASE_URL } from "../api/config";
+import { API_BASE_URL, getImageUrl } from "../api/config";
 
 const AdmissionsOverview = () => {
   const [pageContent, setPageContent] = useState(null);
@@ -65,7 +65,7 @@ const AdmissionsOverview = () => {
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{
-            backgroundImage: `url(${pageContent?.hero_image ? (pageContent.hero_image.startsWith('http') ? pageContent.hero_image : `${API_BASE_URL}${pageContent.hero_image}`) : "https://images.unsplash.com/photo-1427504743380-dda7f8db5954?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"})`,
+            backgroundImage: `url(${getImageUrl(pageContent?.hero_image) || "https://images.unsplash.com/photo-1427504743380-dda7f8db5954?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"})`,
           }}
         ></div>
         <div className="relative z-20 container mx-auto px-4">
@@ -79,7 +79,7 @@ const AdmissionsOverview = () => {
       </section>
 
       {/* Intro / Philosophy */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" >
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-8 lg:gap-12">
             <div className="md:w-1/2">
@@ -109,7 +109,7 @@ const AdmissionsOverview = () => {
             </div>
             <div className="md:w-1/2">
               <img
-                src={pageContent?.why_image ? (pageContent.why_image.startsWith('http') ? pageContent.why_image : `${API_BASE_URL}${pageContent.why_image}`) : "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
+                src={getImageUrl(pageContent?.why_image) || "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
                 alt="Students Learning"
                 loading="lazy"
                 decoding="async"
@@ -121,7 +121,7 @@ const AdmissionsOverview = () => {
       </section>
 
       {/* Admission Process Steps */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50" >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-secondary mb-4">
@@ -160,7 +160,7 @@ const AdmissionsOverview = () => {
       </section>
 
       {/* Eligibility & Documents */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Age Criteria */}
@@ -276,7 +276,7 @@ const AdmissionsOverview = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-secondary text-white">
+      <section className="py-20 bg-secondary text-white" >
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">
@@ -306,7 +306,7 @@ const AdmissionsOverview = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-white text-center">
+      <section className="py-20 bg-white text-center" >
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-gray-900 mb-6">
             {pageContent?.cta_title || "Ready to Join Us?"}
@@ -327,7 +327,7 @@ const AdmissionsOverview = () => {
           </div>
         </div>
       </section>
-    </div>
+    </div >
   );
 };
 

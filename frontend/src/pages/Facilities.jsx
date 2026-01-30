@@ -5,7 +5,7 @@ import {
 } from 'react-icons/fa';
 import { FaRegIdCard } from "react-icons/fa6";
 import SEO from '../components/SEO';
-import { API_BASE_URL } from '../api/config';
+import { API_BASE_URL, getImageUrl } from '../api/config';
 import INTRO from '../images/Home/about2.JPG';
 
 const Facilities = () => {
@@ -123,7 +123,7 @@ const Facilities = () => {
                                     <div className="relative group overflow-hidden rounded-2xl shadow-2xl">
                                         <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                                         <img
-                                            src={facility.image ? (facility.image.startsWith('http') ? facility.image : `${API_BASE_URL}${facility.image}`) : "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
+                                            src={getImageUrl(facility.image) || "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
                                             alt={facility.title}
                                             loading="lazy"
                                             decoding="async"

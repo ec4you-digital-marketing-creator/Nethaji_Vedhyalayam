@@ -25,6 +25,7 @@ const AdminStaff = lazy(() => import('./pages/AdminStaff'));
 const ChairmanMessage = lazy(() => import('./pages/ChairmanMessage'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const FeeReceiptGenerator = lazy(() => import('./pages/FeeReceiptGenerator'));
 import ProtectedRoute from './components/ProtectedRoute';
 import Poster from './components/Poster';
 
@@ -113,6 +114,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/private/fee-receipt-generator" element={<FeeReceiptGenerator />} />
           <Route path="/poster" element={<Poster />} />
         </Routes>
       </Suspense>

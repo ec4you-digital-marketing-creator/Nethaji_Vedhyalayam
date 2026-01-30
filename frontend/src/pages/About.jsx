@@ -4,7 +4,7 @@ import SEO from '../components/SEO';
 import { FaBullseye, FaCompass, FaHeart, FaShieldAlt, FaBolt, FaUsers, FaArrowRight, FaCheckCircle } from 'react-icons/fa';
 import heroImage from '../images/About/about1.JPG';
 import principalFallback from '../images/DSC07211.JPG';
-import { API_BASE_URL } from '../api/config';
+import { API_BASE_URL, getImageUrl } from '../api/config';
 import ourStoryImage from '../images/About/DSC07104.JPG';
 
 const About = () => {
@@ -213,7 +213,7 @@ const About = () => {
                     <h2 className="text-4xl font-bold text-secondary mb-12">Leadership</h2>
                     <div className="max-w-4xl mx-auto bg-gray-50 rounded-2xl p-8 md:p-12 shadow-xl flex flex-col md:flex-row items-center gap-8">
                         <img
-                            src={content?.principal_image ? (content.principal_image.startsWith('http') ? content.principal_image : `${API_BASE_URL}${content.principal_image}`) : principalFallback}
+                            src={getImageUrl(content?.principal_image) || principalFallback}
                             alt="Principal"
                             loading="lazy"
                             decoding="async"

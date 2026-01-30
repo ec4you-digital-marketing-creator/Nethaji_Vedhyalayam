@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaCamera, FaSearchPlus, FaInfoCircle } from 'react-icons/fa';
 import SEO from '../components/SEO';
 import api from '../api/config';
-import { API_BASE_URL } from '../api/config';
+import { API_BASE_URL, getImageUrl } from '../api/config';
 
 const Gallery = () => {
     const [images, setImages] = useState([]);
@@ -19,7 +19,7 @@ const Gallery = () => {
 
                 const formattedImages = response.data.map(item => ({
                     id: item.id,
-                    url: item.image ? (item.image.startsWith('http') ? item.image : `${API_BASE_URL}${item.image}`) : null,
+                    url: getImageUrl(item.image),
                     title: item.title,
                     category: item.category,
                     description: item.description || ''

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaArrowRight, FaCalendarAlt, FaAward, FaChartLine, FaBuilding } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import { API_BASE_URL } from '../api/config';
+import { API_BASE_URL, getImageUrl } from '../api/config';
 
 const History = () => {
     const [pageContent, setPageContent] = useState(null);
@@ -54,7 +54,7 @@ const History = () => {
                 <div
                     className="absolute inset-0 bg-cover bg-center z-0 opacity-50"
                     style={{
-                        backgroundImage: `url(${pageContent?.hero_image ? (pageContent.hero_image.startsWith('http') ? pageContent.hero_image : `${API_BASE_URL}${pageContent.hero_image}`) : 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'})`
+                        backgroundImage: `url(${getImageUrl(pageContent?.hero_image) || 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'})`
                     }}
                 ></div>
                 <div className="relative z-20 container mx-auto px-4">
@@ -122,7 +122,7 @@ const History = () => {
                                     <div className="relative group overflow-hidden rounded-2xl shadow-2xl h-[300px]">
                                         <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
                                         <img
-                                            src={item.image ? (item.image.startsWith('http') ? item.image : `${API_BASE_URL}${item.image}`) : "https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
+                                            src={getImageUrl(item.image) || "https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
                                             alt={item.title}
                                             loading="lazy"
                                             decoding="async"

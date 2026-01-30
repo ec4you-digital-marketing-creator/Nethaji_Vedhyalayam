@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaArrowRight, FaTimes, FaFilter } from 'react-icons/fa';
 import SEO from '../components/SEO';
 import api from '../api/config';
-import { API_BASE_URL } from '../api/config';
+import { API_BASE_URL, getImageUrl } from '../api/config';
 import eventsBannerImage from '../images/C0475T01.JPG';
 
 const CATEGORIES = ["All", "Academic", "Sports", "Cultural", "Workshop", "Celebration"];
@@ -109,7 +109,7 @@ const Events = () => {
                                 {/* Event Image */}
                                 <div className="h-56 overflow-hidden relative">
                                     <img
-                                        src={event.image ? (event.image.startsWith('http') ? event.image : `${API_BASE_URL}${event.image}`) : 'https://via.placeholder.com/400x300'}
+                                        src={getImageUrl(event.image) || 'https://via.placeholder.com/400x300'}
                                         alt={event.title}
                                         loading="lazy"
                                         decoding="async"
@@ -197,7 +197,7 @@ const Events = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2">
                             <div className="h-64 md:h-full relative">
                                 <img
-                                    src={selectedEvent.image ? (selectedEvent.image.startsWith('http') ? selectedEvent.image : `${API_BASE_URL}${selectedEvent.image}`) : 'https://via.placeholder.com/400x300'}
+                                    src={getImageUrl(selectedEvent.image) || 'https://via.placeholder.com/400x300'}
                                     alt={selectedEvent.title}
                                     loading="lazy"
                                     decoding="async"

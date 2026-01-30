@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaEnvelope, FaLinkedin, FaGraduationCap, FaAward } from 'react-icons/fa';
 import SEO from '../components/SEO';
-import { API_BASE_URL } from '../api/config';
+import { API_BASE_URL, getImageUrl } from '../api/config';
 import principalFallback from '../images/DSC07211.JPG';
 
 const Faculty = () => {
@@ -76,7 +76,7 @@ const Faculty = () => {
                             <div key={index} className="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col sm:flex-row border-t-4 border-primary">
                                 <div className="sm:w-2/5 h-64 sm:h-auto relative">
                                     <img
-                                        src={leader?.image ? (leader.image.startsWith('http') ? leader.image : `${API_BASE_URL}${leader.image}`) : (leader?.img || "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80")}
+                                        src={getImageUrl(leader?.image) || leader?.img || "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"}
                                         alt={leader?.name || "Leader"}
                                         loading="lazy"
                                         decoding="async"
@@ -116,7 +116,7 @@ const Faculty = () => {
                                     <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
                                         <div className="h-48 overflow-hidden relative">
                                             <img
-                                                src={dept?.image ? (dept.image.startsWith('http') ? dept.image : `${API_BASE_URL}${dept.image}`) : (dept?.img || "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80")}
+                                                src={getImageUrl(dept?.image) || dept?.img || "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"}
                                                 alt={dept?.head_name || "Department Head"}
                                                 loading="lazy"
                                                 decoding="async"
@@ -148,7 +148,7 @@ const Faculty = () => {
                                     <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
                                         <div className="h-48 overflow-hidden relative bg-gray-100">
                                             <img
-                                                src={member?.image ? (member.image.startsWith('http') ? member.image : `${API_BASE_URL}${member.image}`) : "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"}
+                                                src={getImageUrl(member?.image) || "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"}
                                                 alt={member?.name || "Faculty Member"}
                                                 loading="lazy"
                                                 decoding="async"
